@@ -1,0 +1,24 @@
+<div class="comment-container row">
+	<div  class="col-sm-12">
+		<div class="suggestion-content-container  col-sm-11">
+			<p class="suggestion-title">{{suggestion.title}}</p>
+			<span class="suggestion-divider"></span>
+		</div>
+		<div ng-repeat="comment in comments" class="comment">
+			<p> {{comment.body}}</p>
+			<span class="comment-divider"></span>
+			<p>
+				{{comment.votes}}
+				<span class="glyphicon glyphicon-plus-sign" ng-click="upVote(comment)"></span>
+				<span class="glyphicon glyphicon-minus-sign" ng-click="downVote(comment)"></span>				
+			</p>
+		</div>							
+	</div>
+</div>
+<form ng-submit="addComment()" style="margin-top: 50px">
+	<div class="form-group">
+		<input type="text" class="form-control" placeholder="Comment here" ng-model="body"></input>
+	</div>
+	<button type="submit" class="btn btn-primary">Add</button>
+</form>
+

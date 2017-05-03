@@ -1,0 +1,188 @@
+body {
+	background: linear-gradient(to right bottom,rgba(74, 154, 203,1),rgba(116, 187, 213,1));
+	height: 100%;
+	font-family: 'Comfortaa';
+	color: white;
+	font-size: 1vw;
+	min-height: 100vh;
+}
+
+a {
+	color: inherit;
+	transition: color 800ms ease-out;
+}
+
+a:hover {
+	text-decoration: none;
+	color: rgb(40,96,144);
+}
+
+h1 {
+	font-family: 'Advent Pro';
+}
+
+.main {
+	padding-bottom: 5em;
+}
+
+.row {
+	margin: 0;
+}
+
+.suggestion-divider, .comment-divider {
+	border-bottom: 1px solid white;
+    display: inline-block;
+    vertical-align: top;    
+}
+
+.suggestion-divider {
+    width: 30em;
+}
+
+.comment-divider {
+    width: 28em;
+}
+
+
+.main-container {
+	width: 60vw;
+	margin: 0 auto;
+}
+
+.suggestion-box-header {
+	font-size: 6em;
+}
+
+.suggestion-box-header a {
+	transition: none;
+	text-decoration: none; 
+}
+
+.suggestion-box-header a:hover, .suggestion-box-header a:visited {
+	color: inherit;
+}
+
+.suggestion-container,.comment-container {
+	background-color: rgba(255,255,255,0.15);
+	padding-top: 1vw;
+	margin-top: 3vw;
+}
+
+.suggestion-container:first-of-type {
+	margin-top: 6em;
+}
+
+.comment-divider {
+	margin:0.25em 0;
+}
+
+.comment {
+	font-size: 1em;
+	margin-bottom: 0;
+	margin-top: 2em;
+}
+
+input.form-control {
+	border: none;
+	background-color: rgba(255,255,255,0.15);
+	color: white;
+	border-radius: 0;
+	height: 3em;
+	font-size: 1.5em;
+}
+
+input.form-control::placeholder {
+	color: white;
+}
+
+button.btn {
+	border-radius: 0;
+	font-size: 1.5em;
+	border: none;
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 8em;
+}
+
+.suggestion-number-container, .suggestion-content-container {
+	display: inline-block;
+	position: relative;
+	vertical-align: top;
+}
+
+.suggestion-container .suggestion-number, .comment-container .suggestion-number {
+	font-size: 3em;
+	
+}
+
+.suggestion-number-container {
+	height: 100%;
+	line-height: 1;
+}
+
+.suggestion-content-container {
+	height: 100%;
+	padding-bottom: 2.5em;
+}
+
+.comment-container p, .suggestion-content-container p, .suggestion-content-container a {
+	font-size: 1.25em;
+}
+
+.comment-container .suggestion-content-container {
+	padding-bottom: 0.5em;
+}
+
+.suggestion-content-container .suggestion-title, .comment-container .suggestion-title {
+	font-size: 1.5em;
+}
+
+.comments, .votes {
+	position: absolute;
+	bottom: 0;
+	margin-bottom: 0;
+	padding-right: 1vw;
+	padding-bottom: 0.5vw;
+}
+
+.comment {
+	padding-left: 8em;
+}
+
+.comments {
+	right: 0;
+}
+
+.votes {
+	left: 0;
+	margin-left: 1vw;
+}
+
+@media (min-device-width: 360px) and (max-device-width: 1279px) and (min-device-height: 640px) {
+
+	body {
+		font-size: 1.5vw;
+	}
+
+	.main-container {
+		width: 85vw;
+	}		
+
+}
+
+@media (max-device-width: 600px) and (min-device-height: 480px) and (max-device-height: 960px) {
+
+	body {
+		font-size: 2vw;
+	}
+
+}
+
+@media (max-device-width: 414px) and (max-device-height: 736px) {
+
+	body {
+		font-size: 2.25vw;
+	}
+
+}

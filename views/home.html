@@ -1,0 +1,21 @@
+	<form ng-submit="addSuggestion()" style="margin-top: 50px">
+		<div class="form-group">
+			<input type="text" class="form-control" placeholder="Your super cool suggestions here" ng-model="title"></input>
+		</div>
+		<button type="submit" class="btn btn-primary">Suggest</button>
+	</form>
+	<div class="suggestion-container row" ng-repeat="suggestion in suggestions | orderBy: '-votes'">
+		<div class="suggestion-number-container col-sm-1">
+			<p class="suggestion-number">{{$index+1}}.</p>
+		</div>
+		<div class="suggestion-content-container  col-sm-11">
+			<p class="suggestion-title">{{suggestion.title}}</p>
+			<span class="suggestion-divider"></span>
+			<a class="comments" href="#/suggestion/{{suggestion.id}}">Comments</a>
+			<p class="votes">
+				{{suggestion.votes}}
+				<span class="glyphicon glyphicon-plus-sign" ng-click="upVote(suggestion)"></span>
+				<span class="glyphicon glyphicon-minus-sign" ng-click="downVote(suggestion)"></span>				
+			</p>
+		</div>
+	</div>
