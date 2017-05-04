@@ -15,11 +15,18 @@ css/bootstrap.min.css" rel="stylesheet">
 	<div class="main-container">	
 		<div class="header">
 			<div class="container-fluid">
-				<h1 class="suggestion-box-header">
-					<a href="#/">
-						{{header}}
-					</a>
-				</h1>
+					<ul class="nav">
+						<li class="li-header">
+							<h1 class="suggestion-box-header">
+								<a href="#/">
+									{{header}}
+								</a>
+							</h1>
+						</li>
+						<li class="li-sign_in">
+							<a href="#/sign_in/">Sign In</a>				
+						</li>
+					</ul>
 			</div>	
 		</div>
 		<div class="main">
@@ -35,9 +42,11 @@ css/bootstrap.min.css" rel="stylesheet">
 	<!-- Controllers -->
 	<script src="js/controllers/MainController.js"></script>
 	<script src="js/controllers/SuggestionController.js"></script>
+	<script src="js/controllers/SignInController.js"></script>
 
 	<!-- Services -->
 	<script src="js/services/suggestions.js"></script>
+	<script src="js/services/users.js"></script>
 
 </body>
 </html>

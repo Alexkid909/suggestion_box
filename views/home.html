@@ -1,4 +1,4 @@
-	<form ng-submit="addSuggestion()" style="margin-top: 50px">
+	<form ng-submit="addSuggestion()">
 		<div class="form-group">
 			<input type="text" class="form-control" placeholder="Your super cool suggestions here" ng-model="title"></input>
 		</div>
@@ -9,7 +9,10 @@
 			<p class="suggestion-number">{{$index+1}}.</p>
 		</div>
 		<div class="suggestion-content-container  col-sm-11">
-			<p class="suggestion-title">{{suggestion.title}}</p>
+			<p>
+				<span class="author suggestion-author">{{suggestion.authorName}}</span>
+				<span class="suggestion-title"> - {{suggestion.title}}</span>
+			</p>
 			<span class="suggestion-divider"></span>
 			<a class="comments" href="#/suggestion/{{suggestion.id}}">Comments</a>
 			<p class="votes">

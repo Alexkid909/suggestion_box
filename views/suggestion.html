@@ -1,12 +1,18 @@
 <div class="comment-container row">
 	<div  class="col-sm-12">
-		<div class="suggestion-content-container  col-sm-11">
-			<p class="suggestion-title">{{suggestion.title}}</p>
+		<div class="suggestion-content-container col-sm-12">
+			<p>
+				<span class="author suggestion-author">{{suggestion.authorName}}</span>			
+				<span class="suggestion-title"> - {{suggestion.title}}</span>
+			</p>
 			<span class="suggestion-divider"></span>
 		</div>
 		<div ng-repeat="comment in comments" class="comment">
-			<p> {{comment.body}}</p>
-			<span class="comment-divider"></span>
+			<p>				
+				<span class="author comment-author">{{comment.authorName}}</span>			
+				<span class="comment-title"> - {{comment.body}}</span>
+			</p>
+				<span class="comment-divider"></span>
 			<p>
 				{{comment.votes}}
 				<span class="glyphicon glyphicon-plus-sign" ng-click="upVote(comment)"></span>
