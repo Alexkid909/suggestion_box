@@ -1,20 +1,27 @@
 app.controller('SignInController',['$scope',
 	'$routeParams',
 	'users',
-	'sharedProperties',
+	'sharedScope',
 	function($scope,
 	$routeParams,
-	users,sharedProperties) {
+	users,sharedScope) {
+		var _this = this;
+		_this.data = sharedScope.data;
+
 		$scope.users = users;
-		$scope.signIn = function() {
-			sharedProperties.setCurrentUserId($scope.users.length);
+		$scope.signIn = function() {	
+			var newUserId = users.length;
 			$scope.users.push({
 				id: $scope.users.length,
 				name: $scope.user_name
 			});
-			var currentUserId = sharedProperties.getCurrentUserId();
-			var currentUserName = sharedProperties.getUserName(currentUserId);
-			window.location.href = '#/';			
+			_this.data.currentUser = users[newUserId];
+			console.log("Currently signed in as "+_this.data.currentUser.name);
+
+			
+			// var currentUserId = sharedProperties.getCurrentUserId();
+			// var currentUserName = sharedProperties.getUserName(currentUserId);
+			window.location.href = '#/';
 		};
 	}
 ]);

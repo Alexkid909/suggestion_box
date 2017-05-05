@@ -1,0 +1,288 @@
+[1mdiff --git a/css/main.css b/css/main.css[m
+[1mindex 69b921a..d4dafd9 100644[m
+[1m--- a/css/main.css[m
+[1m+++ b/css/main.css[m
+[36m@@ -110,6 +110,10 @@[m [mform.sign_in {[m
+     margin: 0 auto;	[m
+ }[m
+ [m
+[32m+[m[32mform.form-comment {[m
+[32m+[m	[32mmargin-top: 2em;[m
+[32m+[m[32m}[m
+[32m+[m
+ input.form-control {[m
+ 	border: none;[m
+ 	background-color: rgba(255,255,255,0.15);[m
+[1mdiff --git a/index.html b/index.html[m
+[1mindex 98ea0f9..07bb783 100644[m
+[1m--- a/index.html[m
+[1m+++ b/index.html[m
+[36m@@ -11,7 +11,7 @@[m [mcss/bootstrap.min.css" rel="stylesheet">[m
+ 	<script src="js/vendor/angular-route.js"></script>[m
+ [m
+ </head>[m
+[31m-<body ng-app="SuggestionBox" ng-controller="MainController">[m
+[32m+[m[32m<body ng-app="SuggestionBox" ng-controller="MainController as main">[m
+ 	<div class="main-container">	[m
+ 		<div class="header">[m
+ 			<div class="container-fluid">[m
+[36m@@ -23,8 +23,10 @@[m [mcss/bootstrap.min.css" rel="stylesheet">[m
+ 								</a>[m
+ 							</h1>[m
+ 						</li>[m
+[31m-						<li class="li-sign_in">[m
+[31m-							<a href="#/sign_in/">Sign In</a>				[m
+[32m+[m						[32m<li ng-show="main.data.currentUser.name">Hi {{main.data.currentUser.name}}</li>[m
+[32m+[m						[32m<li	class="li-sign_in">[m
+[32m+[m							[32m<a  ng-hide="main.data.currentUser.name" href="#/sign_in/">Sign In</a>[m
+[32m+[m							[32m<a  ng-show="main.data.currentUser.name" href="#/sign_in/">Sign Out</a>[m
+ 						</li>[m
+ 					</ul>[m
+ 			</div>	[m
+[1mdiff --git a/js/app.js b/js/app.js[m
+[1mindex d57b9fa..c243b22 100644[m
+[1m--- a/js/app.js[m
+[1m+++ b/js/app.js[m
+[36m@@ -1,26 +1,39 @@[m
+ var app = angular.module('SuggestionBox',['ngRoute']);[m
+ [m
+[31m-app.service('sharedProperties',['users',[m
+[31m-	function(users) {[m
+[31m-		var properties = {[m
+[31m-			currentUserId: undefined,[m
+[31m-			getCurrentUserId: function() {[m
+[31m-				return currentUserId;[m
+[31m-			},[m
+[31m-			setCurrentUserId: function(id){[m
+[31m-				currentUserId = id;[m
+[31m-			},[m
+[31m-			getUserName: function(userId) {[m
+[31m-				for (var i = 0; i < users.length; i++) {[m
+[31m-					if (users[i].id == userId) {[m
+[31m-								return users[i].name;[m
+[31m-					};[m
+[32m+[m[32mapp.factory('sharedScope',['users',function(users) {[m
+[32m+[m	[32mvar _this = this;[m
+[32m+[m	[32m_this.data = {[m
+[32m+[m		[32mtext: "init text from factory",[m
+[32m+[m		[32mcurrentUser: {}[m
+[32m+[m	[32m};[m
+[32m+[m	[32m_this.methods = {[m
+[32m+[m		[32mgetCurrentUserId: function() {[m
+[32m+[m			[32mreturn this.currentUserId;[m
+[32m+[m		[32m},[m
+[32m+[m		[32msetCurrentUserId: function(id){[m
+[32m+[m			[32mthis.currentUserId = id;[m
+[32m+[m
+[32m+[m		[32m},[m
+[32m+[m		[32mgetUserName:  function(userId) {[m
+[32m+[m			[32mfor (var i = 0; i < users.length; i++) {[m
+[32m+[m				[32mif (users[i].id == userId) {[m
+[32m+[m							[32mreturn users[i].name;[m
+ 				};[m
+[31m-			}[m
+[31m-		};[m
+[31m-		return properties;[m
+[32m+[m			[32m};[m
+[32m+[m		[32m},[m
+[32m+[m		[32mtest: function() {[m
+[32m+[m			[32mdebugger;[m
+[32m+[m		[32m}[m
+[32m+[m	[32m};[m
+[32m+[m	[32mreturn _this;[m
+ }]);[m
+ [m
+[32m+[m[32m// app.service('sharedProperties',['users',function(users) {[m
+[32m+[m[32m// 		debugger;[m
+[32m+[m[32m// 		var properties =[m[41m [m
+[32m+[m[32m// 		return properties;[m
+[32m+[m[32m// }]);[m
+[32m+[m
+ app.config(function($routeProvider,$locationProvider) {[m
+     $locationProvider.hashPrefix('');[m
+ 	$routeProvider[m
+[1mdiff --git a/js/controllers/MainController.js b/js/controllers/MainController.js[m
+[1mindex f3b556b..af025de 100644[m
+[1m--- a/js/controllers/MainController.js[m
+[1m+++ b/js/controllers/MainController.js[m
+[36m@@ -1,14 +1,22 @@[m
+ app.controller('MainController',[[m
+ 	'$scope',[m
+ 	'suggestions',[m
+[31m-	'sharedProperties',[m
+[31m-	function($scope,suggestions,sharedProperties) {[m
+[32m+[m	[32m'sharedScope','sharedScope',[m
+[32m+[m	[32mfunction($scope,suggestions,sharedScope,sharedScope) {[m
+[32m+[m		[32mvar _this = this;[m
+[32m+[m		[32m// _this.data = sharedScope.data;[m
+[32m+[m		[32m// _this.methods = sharedScope.methods;[m
+[32m+[m		[32m_this.data = sharedScope.data;[m
+[32m+[m		[32mfor (key in sharedScope.methods) {[m
+[32m+[m			[32m_this[key] = sharedScope.methods[key];[m
+[32m+[m		[32m};[m
+[32m+[m
+ 		$scope.header = 'Suggestion Box';[m
+ 		$scope.suggestions = suggestions;[m
+ 		$scope.getSuggestionAuthorNames = function() {[m
+ 			for (var i = 0;i < $scope.suggestions.length;i++) {[m
+ 					var authorId = $scope.suggestions[i].authorId;[m
+[31m-					$scope.suggestions[i].authorName = sharedProperties.getUserName(authorId);[m
+[32m+[m					[32m$scope.suggestions[i].authorName = _this.getUserName(authorId);[m
+ 			};[m
+ 		};[m
+ 		$scope.getSuggestionAuthorNames();[m
+[36m@@ -16,13 +24,11 @@[m [mapp.controller('MainController',[[m
+ 			if(!$scope.title || $scope.title === "") {[m
+ 				return; [m
+ 			}[m
+[31m-			$scope.authorId = sharedProperties.getCurrentUserId();[m
+[31m-			$scope.authorName = sharedProperties.getUserName($scope.authorId);[m
+ 			$scope.suggestions.push({[m
+ 				id: suggestions.length,[m
+ 				title: $scope.title,[m
+[31m-				authorId: $scope.authorId,[m
+[31m-				authorName: $scope.authorName,[m
+[32m+[m				[32mauthorId: _this.data.currentUser.id,[m
+[32m+[m				[32mauthorName: _this.data.currentUser.name,[m
+ 				votes: 0,[m
+ 				comments: [][m
+ 			});[m
+[36m@@ -35,5 +41,10 @@[m [mapp.controller('MainController',[[m
+ 		$scope.downVote = function(suggestion) {[m
+ 			--suggestion.votes[m
+ 		};		[m
+[32m+[m		[32m$scope.getCurrentUserName = function() {[m
+[32m+[m			[32mif(_this.getCurrentUserId() == undefined) {[m
+[32m+[m				[32mthis.currentUserName = _this.getUserName(_this.getCurrentUserId());[m
+[32m+[m			[32m};[m
+[32m+[m		[32m};[m[41m	[m
+ 	}[m
+ ]);[m
+\ No newline at end of file[m
+[1mdiff --git a/js/controllers/SignInController.js b/js/controllers/SignInController.js[m
+[1mindex eb8dd69..d4d3552 100644[m
+[1m--- a/js/controllers/SignInController.js[m
+[1m+++ b/js/controllers/SignInController.js[m
+[36m@@ -1,20 +1,27 @@[m
+ app.controller('SignInController',['$scope',[m
+ 	'$routeParams',[m
+ 	'users',[m
+[31m-	'sharedProperties',[m
+[32m+[m	[32m'sharedScope',[m
+ 	function($scope,[m
+ 	$routeParams,[m
+[31m-	users,sharedProperties) {[m
+[32m+[m	[32musers,sharedScope) {[m
+[32m+[m		[32mvar _this = this;[m
+[32m+[m		[32m_this.data = sharedScope.data;[m
+[32m+[m
+ 		$scope.users = users;[m
+[31m-		$scope.signIn = function() {[m
+[31m-			sharedProperties.setCurrentUserId($scope.users.length);[m
+[32m+[m		[32m$scope.signIn = function() {[m[41m	[m
+[32m+[m			[32mvar newUserId = users.length;[m
+ 			$scope.users.push({[m
+ 				id: $scope.users.length,[m
+ 				name: $scope.user_name[m
+ 			});[m
+[31m-			var currentUserId = sharedProperties.getCurrentUserId();[m
+[31m-			var currentUserName = sharedProperties.getUserName(currentUserId);[m
+[31m-			window.location.href = '#/';			[m
+[32m+[m			[32m_this.data.currentUser = users[newUserId];[m
+[32m+[m			[32mconsole.log("Currently signed in as "+_this.data.currentUser.name);[m
+[32m+[m
+[32m+[m[41m			[m
+[32m+[m			[32m// var currentUserId = sharedProperties.getCurrentUserId();[m
+[32m+[m			[32m// var currentUserName = sharedProperties.getUserName(currentUserId);[m
+[32m+[m			[32mwindow.location.href = '#/';[m
+ 		};[m
+ 	}[m
+ ]);[m
+\ No newline at end of file[m
+[1mdiff --git a/js/controllers/SuggestionController.js b/js/controllers/SuggestionController.js[m
+[1mindex 4fa5cee..b51278e 100644[m
+[1m--- a/js/controllers/SuggestionController.js[m
+[1m+++ b/js/controllers/SuggestionController.js[m
+[36m@@ -1,27 +1,32 @@[m
+ app.controller('SuggestionController',[m
+ 	['$scope',[m
+ 	'$routeParams',[m
+[31m-	'suggestions','sharedProperties',[m
+[31m-	function($scope,$routeParams,suggestions,sharedProperties) {[m
+[32m+[m	[32m'suggestions','sharedScope',[m
+[32m+[m	[32mfunction($scope,$routeParams,suggestions,sharedScope) {[m
+[32m+[m		[32mvar _this = this;[m
+[32m+[m		[32m_this.data = sharedScope.data;[m
+[32m+[m		[32mfor (key in sharedScope.methods) {[m
+[32m+[m			[32m_this[key] = sharedScope.methods[key];[m
+[32m+[m		[32m};[m
+[32m+[m
+ 		$scope.suggestion = suggestions[$routeParams.id];[m
+ 		$scope.comments = $scope.suggestion.comments;[m
+ 		$scope.getCommentAuthorNames = function() {[m
+ 			for (var i = 0;i < $scope.comments.length;i++) {[m
+ 					var authorId = $scope.comments[i].authorId;[m
+[31m-					$scope.comments[i].authorName = sharedProperties.getUserName(authorId);[m
+[32m+[m					[32m$scope.comments[i].authorName = _this.getUserName(authorId);[m
+ 			};[m
+ 		};[m
+ 		$scope.getCommentAuthorNames();		[m
+ 		$scope.addComment = function() {[m
+[32m+[m			[32mdebugger;[m
+ 			if(!$scope.body || $scope.body === "") {[m
+ 				return; [m
+[31m-			}[m
+[31m-			$scope.authorId = sharedProperties.getCurrentUserId();[m
+[31m-			$scope.authorName = sharedProperties.getUserName($scope.authorId);				 [m
+[32m+[m			[32m}[m[41m			 [m
+ 			$scope.suggestion.comments.push({[m
+ 				body: $scope.body,[m
+[31m-				authorId: $scope.authorId,[m
+[31m-				authorName: $scope.authorName,				[m
+[32m+[m				[32mauthorId: _this.data.currentUser.id,[m
+[32m+[m				[32mauthorName: _this.data.currentUser.name,[m[41m			[m
+ 				votes: 0,[m
+ [m
+ 			});[m
+[1mdiff --git a/views/home.html b/views/home.html[m
+[1mindex 659b250..7754679 100644[m
+[1m--- a/views/home.html[m
+[1m+++ b/views/home.html[m
+[36m@@ -1,4 +1,4 @@[m
+[31m-	<form ng-submit="addSuggestion()">[m
+[32m+[m	[32m<form ng-show="main.data.currentUser.name" ng-submit="addSuggestion()">[m
+ 		<div class="form-group">[m
+ 			<input type="text" class="form-control" placeholder="Your super cool suggestions here" ng-model="title"></input>[m
+ 		</div>[m
+[36m@@ -17,8 +17,8 @@[m
+ 			<a class="comments" href="#/suggestion/{{suggestion.id}}">Comments</a>[m
+ 			<p class="votes">[m
+ 				{{suggestion.votes}}[m
+[31m-				<span class="glyphicon glyphicon-plus-sign" ng-click="upVote(suggestion)"></span>[m
+[31m-				<span class="glyphicon glyphicon-minus-sign" ng-click="downVote(suggestion)"></span>				[m
+[32m+[m				[32m<span ng-show="main.data.currentUser.name" class="glyphicon glyphicon-plus-sign" ng-click="upVote(suggestion)"></span>[m
+[32m+[m				[32m<span ng-show="main.data.currentUser.name" class="glyphicon glyphicon-minus-sign" ng-click="downVote(suggestion)"></span>[m[41m				[m
+ 			</p>[m
+ 		</div>[m
+ 	</div>[m
+[1mdiff --git a/views/suggestion.html b/views/suggestion.html[m
+[1mindex 000a10e..610d6cb 100644[m
+[1m--- a/views/suggestion.html[m
+[1m+++ b/views/suggestion.html[m
+[36m@@ -15,13 +15,13 @@[m
+ 				<span class="comment-divider"></span>[m
+ 			<p>[m
+ 				{{comment.votes}}[m
+[31m-				<span class="glyphicon glyphicon-plus-sign" ng-click="upVote(comment)"></span>[m
+[31m-				<span class="glyphicon glyphicon-minus-sign" ng-click="downVote(comment)"></span>				[m
+[32m+[m				[32m<span ng-show="main.data.currentUser.name" class="glyphicon glyphicon-plus-sign" ng-click="upVote(comment)"></span>[m
+[32m+[m				[32m<span ng-show="main.data.currentUser.name" class="glyphicon glyphicon-minus-sign" ng-click="downVote(comment)"></span>[m[41m				[m
+ 			</p>[m
+ 		</div>							[m
+ 	</div>[m
+ </div>[m
+[31m-<form ng-submit="addComment()" style="margin-top: 50px">[m
+[32m+[m[32m<form class="form-comment" ng-show="main.data.currentUser.name" ng-submit="addComment()">[m
+ 	<div class="form-group">[m
+ 		<input type="text" class="form-control" placeholder="Comment here" ng-model="body"></input>[m
+ 	</div>[m

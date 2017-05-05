@@ -15,13 +15,13 @@
 				<span class="comment-divider"></span>
 			<p>
 				{{comment.votes}}
-				<span class="glyphicon glyphicon-plus-sign" ng-click="upVote(comment)"></span>
-				<span class="glyphicon glyphicon-minus-sign" ng-click="downVote(comment)"></span>				
+				<span ng-show="main.data.currentUser.name" class="glyphicon glyphicon-plus-sign" ng-click="upVote(comment)"></span>
+				<span ng-show="main.data.currentUser.name" class="glyphicon glyphicon-minus-sign" ng-click="downVote(comment)"></span>				
 			</p>
 		</div>							
 	</div>
 </div>
-<form ng-submit="addComment()" style="margin-top: 50px">
+<form class="form-comment" ng-show="main.data.currentUser.name" ng-submit="addComment()">
 	<div class="form-group">
 		<input type="text" class="form-control" placeholder="Comment here" ng-model="body"></input>
 	</div>

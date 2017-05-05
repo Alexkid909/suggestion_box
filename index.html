@@ -11,7 +11,7 @@ css/bootstrap.min.css" rel="stylesheet">
 	<script src="js/vendor/angular-route.js"></script>
 
 </head>
-<body ng-app="SuggestionBox" ng-controller="MainController">
+<body ng-app="SuggestionBox" ng-controller="MainController as main">
 	<div class="main-container">	
 		<div class="header">
 			<div class="container-fluid">
@@ -23,8 +23,10 @@ css/bootstrap.min.css" rel="stylesheet">
 								</a>
 							</h1>
 						</li>
-						<li class="li-sign_in">
-							<a href="#/sign_in/">Sign In</a>				
+						<li ng-show="main.data.currentUser.name">Hi {{main.data.currentUser.name}}</li>
+						<li	class="li-sign_in">
+							<a  ng-hide="main.data.currentUser.name" href="#/sign_in/">Sign In</a>
+							<a  ng-show="main.data.currentUser.name" href="#/sign_in/">Sign Out</a>
 						</li>
 					</ul>
 			</div>	

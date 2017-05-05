@@ -1,14 +1,22 @@
 app.controller('MainController',[
 	'$scope',
 	'suggestions',
-	'sharedProperties',
-	function($scope,suggestions,sharedProperties) {
+	'sharedScope','sharedScope',
+	function($scope,suggestions,sharedScope,sharedScope) {
+		var _this = this;
+		// _this.data = sharedScope.data;
+		// _this.methods = sharedScope.methods;
+		_this.data = sharedScope.data;
+		for (key in sharedScope.methods) {
+			_this[key] = sharedScope.methods[key];
+		};
+
 		$scope.header = 'Suggestion Box';
 		$scope.suggestions = suggestions;
 		$scope.getSuggestionAuthorNames = function() {
 			for (var i = 0;i < $scope.suggestions.length;i++) {
 					var authorId = $scope.suggestions[i].authorId;
-					$scope.suggestions[i].authorName = sharedProperties.getUserName(authorId);
+					$scope.suggestions[i].authorName = _this.getUserName(authorId);
 			};
 		};
 		$scope.getSuggestionAuthorNames();
@@ -16,13 +24,11 @@ app.controller('MainController',[
 			if(!$scope.title || $scope.title === "") {
 				return; 
 			}
-			$scope.authorId = sharedProperties.getCurrentUserId();
-			$scope.authorName = sharedProperties.getUserName($scope.authorId);
 			$scope.suggestions.push({
 				id: suggestions.length,
 				title: $scope.title,
-				authorId: $scope.authorId,
-				authorName: $scope.authorName,
+				authorId: _this.data.currentUser.id,
+				authorName: _this.data.currentUser.name,
 				votes: 0,
 				comments: []
 			});
@@ -35,5 +41,10 @@ app.controller('MainController',[
 		$scope.downVote = function(suggestion) {
 			--suggestion.votes
 		};		
+		$scope.getCurrentUserName = function() {
+			if(_this.getCurrentUserId() == undefined) {
+				this.currentUserName = _this.getUserName(_this.getCurrentUserId());
+			};
+		};	
 	}
 ]);
