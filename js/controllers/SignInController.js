@@ -16,11 +16,7 @@ app.controller('SignInController',['$scope',
 				name: $scope.user_name
 			});
 			_this.data.currentUser = users[newUserId];
-			console.log("Currently signed in as "+_this.data.currentUser.name);
-
-			
-			// var currentUserId = sharedProperties.getCurrentUserId();
-			// var currentUserName = sharedProperties.getUserName(currentUserId);
+			console.log("Currently signed in as "+_this.data.currentUser.name);			
 			window.location.href = '#/';
 		};
 	}

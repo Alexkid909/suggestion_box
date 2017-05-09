@@ -1,19 +1,25 @@
+	<p class="" ng-bind="main.data.editMode"></p>
+	<p ng-hide="main.data.currentUser.name" class="">Sign in to add, vote, or comment on a suggestion.</p>
+	<p ng-show="main.data.currentUser.name">Hi {{main.data.currentUser.name}}! You can add, vote, or comment on a suggestion.</p>
 	<form ng-show="main.data.currentUser.name" ng-submit="addSuggestion()">
 		<div class="form-group">
 			<input type="text" class="form-control" placeholder="Your super cool suggestions here" ng-model="title"></input>
 		</div>
 		<button type="submit" class="btn btn-primary">Suggest</button>
 	</form>
-	<div class="suggestion-container row" ng-repeat="suggestion in suggestions | orderBy: '-votes'">
+	<div class="suggestion-container row" ng-repeat="suggestion in suggestions | orderBy: '-votes' | filter:{'deleted' : 'false'}"
+	ng-class="{active : main.data.editItem == $index}">
 		<div class="suggestion-number-container col-sm-1">
 			<p class="suggestion-number">{{$index+1}}.</p>
 		</div>
 		<div class="suggestion-content-container  col-sm-11">
 			<p>
 				<span class="author suggestion-author">{{suggestion.authorName}}</span>
-				<span class="suggestion-title"> - {{suggestion.title}}</span>
+				<span> - </span>
+				<span ng-model="suggestion.title" class="suggestion-title">{{suggestion.title}}</span>
 			</p>
 			<span class="suggestion-divider"></span>
+			<span class="glyphicon glyphicon-edit" ng-click="editSuggestion($index,$event,suggestion)"></span>
 			<a class="comments" href="#/suggestion/{{suggestion.id}}">Comments</a>
 			<p class="votes">
 				{{suggestion.votes}}

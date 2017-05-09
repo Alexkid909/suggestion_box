@@ -7,7 +7,7 @@
 			</p>
 			<span class="suggestion-divider"></span>
 		</div>
-		<div ng-repeat="comment in comments" class="comment">
+		<div ng-repeat="comment in comments | filter:{'deleted' : 'false'}" class="comment">
 			<p>				
 				<span class="author comment-author">{{comment.authorName}}</span>			
 				<span class="comment-title"> - {{comment.body}}</span>

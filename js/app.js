@@ -4,7 +4,8 @@ app.factory('sharedScope',['users',function(users) {
 	var _this = this;
 	_this.data = {
 		text: "init text from factory",
-		currentUser: {}
+		currentUser: {},
+		editMode: false,
 	};
 	_this.methods = {
 		getCurrentUserId: function() {
@@ -21,18 +22,24 @@ app.factory('sharedScope',['users',function(users) {
 				};
 			};
 		},
-		test: function() {
+		signOut: function(e) {
 			debugger;
+			e.preventDefault
+			_this.data.currentUser = {};
+			console.log("Currently signed in as "+_this.data.currentUser.name);			
+
+		},
+		logEditMode: function() {
+			debugger;
+			console.log(_this.data.editMode); 
+		},
+		toggleEditMode: function()	{
+			var editMode = _this.data.editMode;
+			_this.data.editMode = !editMode;
 		}
 	};
 	return _this;
 }]);
-
-// app.service('sharedProperties',['users',function(users) {
-// 		debugger;
-// 		var properties = 
-// 		return properties;
-// }]);
 
 app.config(function($routeProvider,$locationProvider) {
     $locationProvider.hashPrefix('');

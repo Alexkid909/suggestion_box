@@ -12,6 +12,7 @@ css/bootstrap.min.css" rel="stylesheet">
 
 </head>
 <body ng-app="SuggestionBox" ng-controller="MainController as main">
+	<div class="full-app-greyout-filter" ng-class="{active : main.data.editMode}"></div>
 	<div class="main-container">	
 		<div class="header">
 			<div class="container-fluid">
@@ -23,10 +24,10 @@ css/bootstrap.min.css" rel="stylesheet">
 								</a>
 							</h1>
 						</li>
-						<li ng-show="main.data.currentUser.name">Hi {{main.data.currentUser.name}}</li>
 						<li	class="li-sign_in">
-							<a  ng-hide="main.data.currentUser.name" href="#/sign_in/">Sign In</a>
-							<a  ng-show="main.data.currentUser.name" href="#/sign_in/">Sign Out</a>
+							<a ng-hide="main.data.currentUser.name" href="#/sign_in/">Sign In</a>
+							<p ng-click="main.signOut($event)" ng-show="main.data.currentUser.name">Sign Out</p>
+<!-- 							<a ng-click="signOut(event)" ng-show="main.data.currentUser.name" href="#/sign_in/">Sign Out</a> -->
 						</li>
 					</ul>
 			</div>	
