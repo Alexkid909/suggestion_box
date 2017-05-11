@@ -18,22 +18,36 @@ app.factory('sharedScope',['users',function(users) {
 		getUserName:  function(userId) {
 			for (var i = 0; i < users.length; i++) {
 				if (users[i].id == userId) {
-							return users[i].name;
+					return users[i].name;
 				};
 			};
 		},
 		signOut: function(e) {
-			debugger;
 			e.preventDefault
 			_this.data.currentUser = {};
 			console.log("Currently signed in as "+_this.data.currentUser.name);			
 
 		},
-		logEditMode: function() {
-			debugger;
-			console.log(_this.data.editMode); 
+		getUserVotedItem: function(item,itemType) {
+			var userVotedItem;
+			if (_this.data.currentUser.hasOwnProperty(itemType+"sVoted")) {
+				_this.data.currentUser[itemType+"sVoted"].forEach(function(itemVoted) { 
+					if (itemVoted.id == item.id) {
+						userVotedItem = itemVoted;
+					};
+				});
+				return userVotedItem;
+			};
 		},
-		toggleEditMode: function()	{
+		getCurrentUserItemScore:function(item,itemType) {
+			var userVotedItem = this.getUserVotedItem(item,itemType);
+			if (!userVotedItem) {
+				return 0;
+			} else {
+				return userVotedItem.score;
+			};
+		},
+		toggleEditMode: function() {
 			var editMode = _this.data.editMode;
 			_this.data.editMode = !editMode;
 		}

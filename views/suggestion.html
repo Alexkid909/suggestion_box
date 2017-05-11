@@ -14,9 +14,10 @@
 			</p>
 				<span class="comment-divider"></span>
 			<p>
+				<span class="glyphicon glyphicon-thumbs-up"></span>
 				{{comment.votes}}
-				<span ng-show="main.data.currentUser.name" class="glyphicon glyphicon-plus-sign" ng-click="upVote(comment)"></span>
-				<span ng-show="main.data.currentUser.name" class="glyphicon glyphicon-minus-sign" ng-click="downVote(comment)"></span>				
+				<span class="glyphicon glyphicon-plus-sign"			ng-show="!(main.getCurrentUserItemScore(comment,'comment') > 0) && main.data.currentUser.id != comment.authorId && main.data.currentUser.id" ng-click="vote(comment,'up')"></span>
+				<span class="glyphicon glyphicon-minus-sign" ng-show="!(main.getCurrentUserItemScore(comment,'comment') < 0) && main.data.currentUser.id != comment.authorId && main.data.currentUser.id" ng-click="vote(comment,'down')"></span>
 			</p>
 		</div>							
 	</div>

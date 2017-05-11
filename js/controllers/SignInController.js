@@ -16,7 +16,7 @@ app.controller('SignInController',['$scope',
 				name: $scope.user_name
 			});
 			_this.data.currentUser = users[newUserId];
-			console.log("Currently signed in as "+_this.data.currentUser.name);			
+			// console.log("Currently signed in as "+_this.data.currentUser.name+" ID "+_this.data.currentUser.id);			
 			window.location.href = '#/';
 		};
 	}

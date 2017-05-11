@@ -36,11 +36,35 @@ app.controller('MainController',[
 		$scope.deleteSuggestion = function() {
 
 		};
-		$scope.upVote = function(suggestion) {
-			++suggestion.votes
-		};
-		$scope.downVote = function(suggestion) {
-			--suggestion.votes
+		$scope.vote = function(suggestion,direction) {
+			var userVotedItem = _this.getUserVotedItem(suggestion,"suggestion");			
+			if(!userVotedItem) {
+				var newItem = 					{
+						id: suggestion.id,
+						score: 1
+					};
+				if(!_this.data.currentUser.suggestionsVoted) {
+					_this.data.currentUser.suggestionsVoted = []
+				}
+				_this.data.currentUser.suggestionsVoted.push(newItem);
+			} else {
+				switch (direction) {
+					case "up":
+						++userVotedItem.score;
+						break;
+					case "down":
+						--userVotedItem.score;
+						break;
+				};
+			};
+			switch (direction) {
+				case "up":
+					++suggestion.votes;
+					break;
+				case "down":
+					--suggestion.votes;
+					break;
+			};
 		};		
 		$scope.getCurrentUserName = function() {
 			if(_this.getCurrentUserId() == undefined) {

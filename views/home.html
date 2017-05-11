@@ -1,4 +1,4 @@
-	<p class="" ng-bind="main.data.editMode"></p>
+
 	<p ng-hide="main.data.currentUser.name" class="">Sign in to add, vote, or comment on a suggestion.</p>
 	<p ng-show="main.data.currentUser.name">Hi {{main.data.currentUser.name}}! You can add, vote, or comment on a suggestion.</p>
 	<form ng-show="main.data.currentUser.name" ng-submit="addSuggestion()">
@@ -19,12 +19,14 @@
 				<span ng-model="suggestion.title" class="suggestion-title">{{suggestion.title}}</span>
 			</p>
 			<span class="suggestion-divider"></span>
-			<span class="glyphicon glyphicon-edit" ng-click="editSuggestion($index,$event,suggestion)"></span>
+			<span ng-show="main.data.currentUser.id == suggestion.authorId" class="glyphicon glyphicon-edit" ng-click="editSuggestion($index,$event,suggestion)"></span>
 			<a class="comments" href="#/suggestion/{{suggestion.id}}">Comments</a>
 			<p class="votes">
-				{{suggestion.votes}}
-				<span ng-show="main.data.currentUser.name" class="glyphicon glyphicon-plus-sign" ng-click="upVote(suggestion)"></span>
-				<span ng-show="main.data.currentUser.name" class="glyphicon glyphicon-minus-sign" ng-click="downVote(suggestion)"></span>				
+				<span class="glyphicon glyphicon-thumbs-up"></span>
+				<span>{{suggestion.votes}}</span>
+				<span 
+				 ng-show="!(main.getCurrentUserItemScore(suggestion,'suggestion') > 0) && main.data.currentUser.id != suggestion.authorId && main.data.currentUser.id" class="glyphicon glyphicon-plus-sign" ng-click="vote(suggestion,'up')"></span>
+				<span ng-show="!(main.getCurrentUserItemScore(suggestion,'suggestion') < 0) && main.data.currentUser.id != suggestion.authorId && main.data.currentUser.id" class="glyphicon glyphicon-minus-sign" ng-click="vote(suggestion,'down')"></span>
 			</p>
 		</div>
 	</div>

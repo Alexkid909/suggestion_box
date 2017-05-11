@@ -22,20 +22,46 @@ app.controller('SuggestionController',
 			debugger;
 			if(!$scope.body || $scope.body === "") {
 				return; 
-			}			 
+			}
 			$scope.suggestion.comments.push({
+				id: $scope.comments.length,
 				body: $scope.body,
 				authorId: _this.data.currentUser.id,
-				authorName: _this.data.currentUser.name,			
+				authorName: _this.data.currentUser.name,
+				deleted: false,
 				votes: 0,
 
 			});
 			$scope.body = '';
 		};
-		$scope.upVote = function(comment) {
-			++comment.votes
-		};
-		$scope.downVote = function(comment) {
-			--comment.votes
-		};
+		$scope.vote = function(comment,direction) {
+			var userVotedItem = _this.getUserVotedItem(comment,"comment");			
+			if(!userVotedItem) {
+				var newItem = 					{
+						id: comment.id,
+						score: 1
+					};
+				if(!_this.data.currentUser.commentsVoted) {
+					_this.data.currentUser.commentsVoted = []
+				}
+				_this.data.currentUser.commentsVoted.push(newItem);
+			} else {
+				switch (direction) {
+					case "up":
+						++userVotedItem.score;
+						break;
+					case "down":
+						--userVotedItem.score;
+						break;
+				};
+			};
+			switch (direction) {
+				case "up":
+					++comment.votes;
+					break;
+				case "down":
+					--comment.votes;
+					break;
+			};
+		};	
 	}]);

@@ -9,18 +9,21 @@ app.factory('suggestions',[function() {
 				deleted: false,
 				comments: [
 					{
+						id: 0,
 						body: "Awesome idea!",
 						authorId: 3,
 						deleted: false,
 						votes: 5
 					},
 					{
+						id: 1,
 						body: "Never gonna happen.  This will totally never happen dude.  I can eat gallons of Ice cream and its likely to cost the business a fortune and make me ill.",
 						authorId: 2,
 						deleted: true,
 						votes: 3
 					},
 					{
+						id: 2,
 						body: "Can we also have sprinkles?",
 						authorId: 4,
 						deleted: false,				
@@ -36,6 +39,7 @@ app.factory('suggestions',[function() {
 				deleted: true,
 				comments: [
 					{
+						id: 0,
 						body: "Awesome suggeston!",
 						authorId: 2,
 						deleted: false,				
@@ -51,12 +55,14 @@ app.factory('suggestions',[function() {
 				votes: 10,
 				comments: [
 					{
+						id: 0,
 						body: "Sounds, great but could be tricky.",				
 						authorId: 1,
 						deleted: false,
 						votes: 2
 					},
 					{
+						id: 1,
 						body: "Oh come on.",
 						authorId: 4,
 						deleted: false,				
