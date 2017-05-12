@@ -12,7 +12,7 @@ css/bootstrap.min.css" rel="stylesheet">
 
 </head>
 <body ng-app="SuggestionBox" ng-controller="MainController as main">
-	<div class="full-app-greyout-filter" ng-class="{active : main.data.editMode}"></div>
+	<div class="full-app-greyout-filter" ng-class="{active : main.data.editMode, active : main.data.dialogMode}"></div>
 	<div class="main-container">	
 		<div class="header">
 			<div class="container-fluid">
@@ -27,12 +27,19 @@ css/bootstrap.min.css" rel="stylesheet">
 						<li	class="li-sign_in">
 							<a ng-hide="main.data.currentUser.name" href="#/sign_in/">Sign In</a>
 							<p ng-click="main.signOut($event)" ng-show="main.data.currentUser.name">Sign Out</p>
-<!-- 							<a ng-click="signOut(event)" ng-show="main.data.currentUser.name" href="#/sign_in/">Sign Out</a> -->
 						</li>
 					</ul>
 			</div>	
 		</div>
 		<div class="main">
+		<md-button class="md-primary md-raised" ng-click="showConfirm($event)">
+	      Confirm Dialog
+	    </md-button>
+<!-- 			<div class="dialog" ng-class="{active : main.data.dialogMode}">
+				<p>Are you sure?</p>
+				<button>No</button>
+				<button>Yes</button>
+			</div> -->
 			<div ng-view>	
 			</div>
 		</div>	

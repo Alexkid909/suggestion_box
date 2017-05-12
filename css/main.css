@@ -7,19 +7,60 @@ body {
 	min-height: 100vh;
 }
 
-div.full-app-greyout-filter {
+div.full-app-greyout-filter, div.dialog {
 	position: fixed;
-	height: 100vh;
-	width: 100vw;
-    display: none;
-    opacity: 0.3;
-    background-color: black;
     z-index: -1;
+    display: none;
 }
 
-div.full-app-greyout-filter.active{
+div.full-app-greyout-filter {
+	height: 100vh;
+	width: 100vw;
+    opacity: 0.3;
+    background-color: black;
+}
+
+div.full-app-greyout-filter.active, div.dialog.active {
 	display: initial;
 	z-index: 1;
+}
+
+div.dialog {
+	height: 25%;
+	width: 35%;
+	top: 30%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	background: linear-gradient(to right bottom,rgba(114,179,214,1),rgba(128, 190, 218,1));
+	padding: 2em;
+	border: none;
+}
+
+div.dialog p {
+	font-size: 1.25em;
+}
+
+div.dialog button {
+	width: 6em;
+	padding: 0.5em 1em;
+	background-color: white;
+	position: fixed;
+	bottom: 1em;
+	right: 1em;
+	transition: all 500ms;
+	color: #7fbeda;
+	font-weight: 600;
+	border: 1px solid white;
+}
+
+div.dialog button:hover {
+	color: white;
+	background-color: transparent;
+	border: 1px solid white;
+} 
+
+div.dialog button:nth-of-type(2) {
+	right: 8em;
 }
 
 a {
@@ -74,7 +115,7 @@ ul.nav li a:hover, ul.nav li a:focus {
 }
 
 .suggestion-divider {
-    width: 30em;
+    width: 80%;
 }
 
 .comment-divider {
@@ -102,7 +143,7 @@ ul.nav li a:hover, ul.nav li a:focus {
 
 .suggestion-container,.comment-container {
 	background: linear-gradient(to right bottom,rgba(114,179,214,1),rgba(128, 190, 218,1));
-	padding-top: 1vw;
+	padding: 1em 0.5em;
 	margin-top: 3vw;
 	width: 100%;
 	height: 100%;
@@ -203,11 +244,18 @@ span.suggestion-title {
 	outline: none;
 }
 
-span.glyphicon-edit {
+div.item-toolbar {
 	position: absolute;
     right: 1em;
     top: 0.25em;
+    font-size: 1em;
+    margin-left: 1em;
 }
+
+div.item-toolbar .glyphicon {
+	margin-left: 0.5em;
+}
+
 
 .author {
 	color: rgb(60, 116, 194);
@@ -252,6 +300,11 @@ span.glyphicon-edit {
 		font-size: 2.5vw;
 	}
 
+	div.dialog {
+		width: 75vw;
+		height: 30vw;
+	}
+
 	.glyphicon {
 		font-size: 	1.25em;
 	}
@@ -275,7 +328,7 @@ span.glyphicon-edit {
 @media (max-device-width: 414px) and (max-device-height: 736px) {
 
 	body {
-		font-size: 2.75vw;
+		font-size: 3.25vw;
 	}
 
 

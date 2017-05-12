@@ -19,7 +19,10 @@
 				<span ng-model="suggestion.title" class="suggestion-title">{{suggestion.title}}</span>
 			</p>
 			<span class="suggestion-divider"></span>
-			<span ng-show="main.data.currentUser.id == suggestion.authorId" class="glyphicon glyphicon-edit" ng-click="editSuggestion($index,$event,suggestion)"></span>
+			<div class="item-toolbar">
+				<span ng-show="main.data.currentUser.id == suggestion.authorId" class="glyphicon glyphicon-remove-sign" ng-click="main.deleteItem($event,suggestion,'suggestion')"></span>
+				<span ng-show="main.data.currentUser.id == suggestion.authorId" class="glyphicon glyphicon-edit" ng-click="editSuggestion($index,$event,suggestion)"></span>
+			</div>
 			<a class="comments" href="#/suggestion/{{suggestion.id}}">Comments</a>
 			<p class="votes">
 				<span class="glyphicon glyphicon-thumbs-up"></span>

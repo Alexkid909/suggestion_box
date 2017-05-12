@@ -6,6 +6,7 @@ app.factory('sharedScope',['users',function(users) {
 		text: "init text from factory",
 		currentUser: {},
 		editMode: false,
+		dialogMode: false
 	};
 	_this.methods = {
 		getCurrentUserId: function() {
@@ -50,6 +51,10 @@ app.factory('sharedScope',['users',function(users) {
 		toggleEditMode: function() {
 			var editMode = _this.data.editMode;
 			_this.data.editMode = !editMode;
+		},
+		deleteItem: function(event,item,itemType) {
+			debugger;
+			this.data.dialogMode = true;
 		}
 	};
 	return _this;
