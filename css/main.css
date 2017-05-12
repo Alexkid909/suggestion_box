@@ -1,10 +1,42 @@
+@import url("https://cdn.gitcdn.link/cdn/angular/bower-material/v1.1.4/angular-material.css");
+/*@import url("https://material.angularjs.org/1.1.4/docs.css");*/
+
+.dialogdemoBasicUsage #popupContainer {
+  position: relative; }
+
+.dialogdemoBasicUsage .footer {
+  width: 100%;
+  text-align: center;
+  margin-left: 20px; }
+
+.dialogdemoBasicUsage .footer, .dialogdemoBasicUsage .footer > code {
+  font-size: 0.8em;
+  margin-top: 50px; }
+
+.dialogdemoBasicUsage button {
+  width: 200px; }
+
+.dialogdemoBasicUsage div#status {
+  color: #c60008; }
+
+.dialogdemoBasicUsage .dialog-demo-prerendered md-checkbox {
+  margin-bottom: 0; }
+
+html {
+	height: auto;
+}
+
 body {
 	background: linear-gradient(to right bottom,rgba(74, 154, 203,1),rgba(116, 187, 213,1));
-	height: 100%;
 	font-family: 'Comfortaa';
 	color: white;
 	font-size: 1vw;
 	min-height: 100vh;
+}
+
+p {
+	margin-top: 0;
+	margin-bottom: 0;
 }
 
 div.full-app-greyout-filter, div.dialog {
@@ -25,7 +57,12 @@ div.full-app-greyout-filter.active, div.dialog.active {
 	z-index: 1;
 }
 
-div.dialog {
+md-dialog {
+	position: fixed;
+}
+
+md-dialog.md-default-theme {
+	color: white;
 	height: 25%;
 	width: 35%;
 	top: 30%;
@@ -36,11 +73,19 @@ div.dialog {
 	border: none;
 }
 
-div.dialog p {
+md-dialog.md-content-overflow .md-actions, md-dialog.md-content-overflow md-dialog-actions {
+	border: none;
+}
+
+md-dialog md-dialog-content.md-dialog-content {
+	padding: 0;
+}
+
+md-dialog p {
 	font-size: 1.25em;
 }
 
-div.dialog button {
+md-dialog button.md-button.md-default-theme.md-primary {
 	width: 6em;
 	padding: 0.5em 1em;
 	background-color: white;
@@ -51,16 +96,21 @@ div.dialog button {
 	color: #7fbeda;
 	font-weight: 600;
 	border: 1px solid white;
+	margin: 0;
 }
 
-div.dialog button:hover {
+md-dialog  button.md-button.md-default-theme.md-primary:hover {
 	color: white;
 	background-color: transparent;
 	border: 1px solid white;
 } 
 
-div.dialog button:nth-of-type(2) {
+md-dialog  button.md-button.md-default-theme.md-primary:nth-of-type(2) {
 	right: 8em;
+}
+
+.md-button {
+	text-transform: none;
 }
 
 a {
@@ -218,10 +268,11 @@ button.btn {
 	
 }
 
-.suggestion-number-container {
+.suggestion-number-container p {
 	height: 100%;
 	line-height: 1;
 }
+
 
 .suggestion-content-container {
 	height: 100%;

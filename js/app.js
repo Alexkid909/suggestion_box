@@ -1,4 +1,10 @@
-var app = angular.module('SuggestionBox',['ngRoute']);
+var app = angular.module('SuggestionBox',['ngRoute'
+	,'ngAria'
+	,'ngAnimate'
+	,'ngMaterial'
+	,'ngMessages'
+	// ,'material.svgAssetsCache'
+	]);
 
 app.factory('sharedScope',['users',function(users) {
 	var _this = this;

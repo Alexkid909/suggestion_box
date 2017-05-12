@@ -20,7 +20,7 @@
 			</p>
 			<span class="suggestion-divider"></span>
 			<div class="item-toolbar">
-				<span ng-show="main.data.currentUser.id == suggestion.authorId" class="glyphicon glyphicon-remove-sign" ng-click="main.deleteItem($event,suggestion,'suggestion')"></span>
+				<span ng-show="main.data.currentUser.id == suggestion.authorId" class="glyphicon glyphicon-remove-sign" ng-click="showConfirm($event)"></span>
 				<span ng-show="main.data.currentUser.id == suggestion.authorId" class="glyphicon glyphicon-edit" ng-click="editSuggestion($index,$event,suggestion)"></span>
 			</div>
 			<a class="comments" href="#/suggestion/{{suggestion.id}}">Comments</a>
