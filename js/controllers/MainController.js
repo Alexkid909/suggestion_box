@@ -3,10 +3,10 @@ app.controller('MainController',['$scope'
 	,'sharedScope'
 	,'users'
 	,function($scope,suggestions,sharedScope,users) {
-		// var _this = this;
+		var _this = this;
 		$scope.header = 'Suggestion Box';
 		$scope.suggestions = suggestions;
-		$scope.currentUser = users.currentUser;
+		_this.currentUser = users.currentUser;
 		for (key in sharedScope) {
 			$scope[key] = sharedScope[key];
 		};
