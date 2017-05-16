@@ -29,8 +29,8 @@ css/bootstrap.min.css" rel="stylesheet">
 							</h1>
 						</li>
 						<li	class="li-sign_in">
-							<a ng-hide="main.currentUser.name" href="#/sign_in/">Sign In</a>
-							<p ng-click="signOut($event)" ng-show="main.currentUser.name">Sign Out</p>
+							<a ng-hide="users.currentUser.name" href="#/sign_in/">Sign In</a>
+							<p ng-click="signOut($event)" ng-show="users.currentUser.name">Sign Out</p>
 						</li>
 					</ul>
 			</div>	
@@ -41,7 +41,7 @@ css/bootstrap.min.css" rel="stylesheet">
 				<button ng-click="toggleConfirmDialog()" class="btn-no">No</button>
 				<button ng-click="deleteItem()" class="btn-yes">Yes</button>
 			</div>
-      <p>Hi {{main.currentUser.name}}</p>
+      <p>Index {{users.currentUser.name}}</p>
 			<div ng-view>	
 			</div>
 		</div>	

@@ -1,4 +1,5 @@
 
+	<p>Home {{currentUser.name}}</p>
 	<p ng-hide="currentUser.name" class="">Sign in to add, vote, or comment on a suggestion.</p>
 	<p ng-show="currentUser.name">Hi {{currentUser.name}}! You can add, vote, or comment on a suggestion.</p>
 	<form ng-show="data.currentUser.name" ng-submit="addSuggestion()">

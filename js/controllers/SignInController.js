@@ -9,6 +9,7 @@ app.controller('SignInController',['$scope',
 		_this.data = sharedScope.data;
 
 		$scope.users = users.data;
+		$scope.currentUser = users.currentUser;
 		$scope.signIn = function() {
 		debugger;
 			var newUserId = $scope.users.length;
