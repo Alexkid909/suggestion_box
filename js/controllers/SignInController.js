@@ -7,6 +7,7 @@ app.controller('SignInController',['$scope',
 	users,sharedScope) {
 		var _this = this;
 		_this.data = sharedScope.data;
+		_this.currentUser = users.currentUser;
 
 		$scope.users = users.data;
 		$scope.currentUser = users.currentUser;

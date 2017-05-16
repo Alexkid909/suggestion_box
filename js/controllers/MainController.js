@@ -6,14 +6,16 @@ app.controller('MainController',['$scope'
 		var _this = this;
 		$scope.header = 'Suggestion Box';
 		$scope.suggestions = suggestions;
-		_this.currentUser = users.currentUser;
+		for (key in users) {
+			_this[key] = users[key];
+		};
 		for (key in sharedScope) {
 			$scope[key] = sharedScope[key];
 		};
 		$scope.getSuggestionAuthorNames = function() {
 					for (var i = 0;i < $scope.suggestions.length;i++) {
 					var authorId = $scope.suggestions[i].authorId;
-					$scope.suggestions[i].authorName = users.getUserName(authorId);
+					$scope.suggestions[i].authorName = _this.getUserName(authorId);
 			};
 		};
 		$scope.getSuggestionAuthorNames();
@@ -33,7 +35,7 @@ app.controller('MainController',['$scope'
 			$scope.title = '';
 		};
 		$scope.vote = function(suggestion,direction) {
-			var userVotedItem = users.getUserVotedItem(suggestion,"suggestion");			
+			var userVotedItem = _this.getUserVotedItem(suggestion,"suggestion");			
 			if(!userVotedItem) {
 				var newItem = 					{
 						id: suggestion.id,
