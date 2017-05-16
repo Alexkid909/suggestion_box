@@ -12,17 +12,21 @@
 				<span class="author comment-author">{{comment.authorName}}</span>			
 				<span class="comment-title"> - {{comment.body}}</span>
 			</p>
-				<span class="comment-divider"></span>
+			<span class="comment-divider"></span>
+			<div class="item-toolbar">
+				<span ng-show="data.currentUser.id == suggestion.authorId" class="glyphicon glyphicon-remove-sign" ng-click="toggleConfirmDialog(suggestion)"></span>
+				<span ng-show="data.currentUser.id == suggestion.authorId" class="glyphicon glyphicon-edit" ng-click="editItem($index,$event,suggestion)"></span>
+			</div>
 			<p>
 				<span class="glyphicon glyphicon-thumbs-up"></span>
 				{{comment.votes}}
-				<span class="glyphicon glyphicon-plus-sign"			ng-show="!(main.getCurrentUserItemScore(comment,'comment') > 0) && main.data.currentUser.id != comment.authorId && main.data.currentUser.id" ng-click="vote(comment,'up')"></span>
-				<span class="glyphicon glyphicon-minus-sign" ng-show="!(main.getCurrentUserItemScore(comment,'comment') < 0) && main.data.currentUser.id != comment.authorId && main.data.currentUser.id" ng-click="vote(comment,'down')"></span>
+				<span class="glyphicon glyphicon-plus-sign"	ng-show="!(getCurrentUserItemScore(comment,'comment') > 0) && data.currentUser.id != comment.authorId && data.currentUser.id" ng-click="vote(comment,'up')"></span>
+				<span class="glyphicon glyphicon-minus-sign" ng-show="!(getCurrentUserItemScore(comment,'comment') < 0) && data.currentUser.id != comment.authorId && data.currentUser.id" ng-click="vote(comment,'down')"></span>
 			</p>
 		</div>							
 	</div>
 </div>
-<form class="form-comment" ng-show="main.data.currentUser.name" ng-submit="addComment()">
+<form class="form-comment" ng-show="data.currentUser.name" ng-submit="addComment()">
 	<div class="form-group">
 		<input type="text" class="form-control" placeholder="Comment here" ng-model="body"></input>
 	</div>

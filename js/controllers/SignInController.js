@@ -8,14 +8,15 @@ app.controller('SignInController',['$scope',
 		var _this = this;
 		_this.data = sharedScope.data;
 
-		$scope.users = users;
-		$scope.signIn = function() {	
-			var newUserId = users.length;
+		$scope.users = users.data;
+		$scope.signIn = function() {
+		debugger;
+			var newUserId = $scope.users.length;
 			$scope.users.push({
-				id: $scope.users.length,
+				id: newUserId,
 				name: $scope.user_name
 			});
-			_this.data.currentUser = users[newUserId];
+			users.currentUser = users.data[newUserId];
 			// console.log("Currently signed in as "+_this.data.currentUser.name+" ID "+_this.data.currentUser.id);			
 			window.location.href = '#/';
 		};

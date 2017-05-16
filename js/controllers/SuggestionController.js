@@ -1,12 +1,12 @@
 app.controller('SuggestionController',
 	['$scope',
 	'$routeParams',
-	'suggestions','sharedScope',
-	function($scope,$routeParams,suggestions,sharedScope) {
-		var _this = this;
-		_this.data = sharedScope.data;
-		for (key in sharedScope.methods) {
-			_this[key] = sharedScope.methods[key];
+	'suggestions','sharedScope','users',
+	function($scope,$routeParams,suggestions,sharedScope,users) {
+		// var _this = this;
+		// _this.data = sharedScope.data;
+		for (key in sharedScope) {
+			$scope[key] = sharedScope[key];
 		};
 
 		$scope.suggestion = suggestions[$routeParams.id];
@@ -14,7 +14,7 @@ app.controller('SuggestionController',
 		$scope.getCommentAuthorNames = function() {
 			for (var i = 0;i < $scope.comments.length;i++) {
 					var authorId = $scope.comments[i].authorId;
-					$scope.comments[i].authorName = _this.getUserName(authorId);
+					$scope.comments[i].authorName = users.getUserName(authorId);
 			};
 		};
 		$scope.getCommentAuthorNames();		
@@ -26,8 +26,8 @@ app.controller('SuggestionController',
 			$scope.suggestion.comments.push({
 				id: $scope.comments.length,
 				body: $scope.body,
-				authorId: _this.data.currentUser.id,
-				authorName: _this.data.currentUser.name,
+				authorId: $scope.data.currentUser.id,
+				authorName: $scope.data.currentUser.name,
 				deleted: false,
 				votes: 0,
 
@@ -35,16 +35,16 @@ app.controller('SuggestionController',
 			$scope.body = '';
 		};
 		$scope.vote = function(comment,direction) {
-			var userVotedItem = _this.getUserVotedItem(comment,"comment");			
+			var userVotedItem = users.getUserVotedItem(comment,"comment");			
 			if(!userVotedItem) {
 				var newItem = 					{
 						id: comment.id,
 						score: 1
 					};
-				if(!_this.data.currentUser.commentsVoted) {
+				if(!$scope.data.currentUser.commentsVoted) {
 					_this.data.currentUser.commentsVoted = []
 				}
-				_this.data.currentUser.commentsVoted.push(newItem);
+				$scope.data.currentUser.commentsVoted.push(newItem);
 			} else {
 				switch (direction) {
 					case "up":

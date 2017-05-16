@@ -1,16 +1,16 @@
 
-	<p ng-hide="main.data.currentUser.name" class="">Sign in to add, vote, or comment on a suggestion.</p>
-	<p ng-show="main.data.currentUser.name">Hi {{main.data.currentUser.name}}! You can add, vote, or comment on a suggestion.</p>
-	<form ng-show="main.data.currentUser.name" ng-submit="addSuggestion()">
+	<p ng-hide="currentUser.name" class="">Sign in to add, vote, or comment on a suggestion.</p>
+	<p ng-show="currentUser.name">Hi {{currentUser.name}}! You can add, vote, or comment on a suggestion.</p>
+	<form ng-show="data.currentUser.name" ng-submit="addSuggestion()">
 		<div class="form-group">
 			<input type="text" class="form-control" placeholder="Your super cool suggestions here" ng-model="title"></input>
 		</div>
 		<button type="submit" class="btn btn-primary">Suggest</button>
 	</form>
 	<div class="suggestion-container row" ng-repeat="suggestion in suggestions | orderBy: '-votes' | filter:{'deleted' : 'false'}"
-	ng-class="{active : main.data.editItem == $index}">
+	ng-class="{active : data.itemBeingEdited == $index}">
 		<div class="suggestion-number-container col-sm-1">
-			<p class="suggestion-number">{{$index+1}}.</p>
+			<p class="suggestion-number">{{$index+1}}.</p>		
 		</div>
 		<div class="suggestion-content-container  col-sm-11">
 			<p>
@@ -20,16 +20,16 @@
 			</p>
 			<span class="suggestion-divider"></span>
 			<div class="item-toolbar">
-				<span ng-show="main.data.currentUser.id == suggestion.authorId" class="glyphicon glyphicon-remove-sign" ng-click="showConfirm($event)"></span>
-				<span ng-show="main.data.currentUser.id == suggestion.authorId" class="glyphicon glyphicon-edit" ng-click="editSuggestion($index,$event,suggestion)"></span>
+				<span ng-show="data.currentUser.id == suggestion.authorId" class="glyphicon glyphicon-remove-sign" ng-click="toggleConfirmDialog(suggestion)"></span>
+				<span ng-show="data.currentUser.id == suggestion.authorId" class="glyphicon glyphicon-edit" ng-click="editItem($index,$event,suggestion)"></span>
 			</div>
 			<a class="comments" href="#/suggestion/{{suggestion.id}}">Comments</a>
 			<p class="votes">
 				<span class="glyphicon glyphicon-thumbs-up"></span>
 				<span>{{suggestion.votes}}</span>
 				<span 
-				 ng-show="!(main.getCurrentUserItemScore(suggestion,'suggestion') > 0) && main.data.currentUser.id != suggestion.authorId && main.data.currentUser.id" class="glyphicon glyphicon-plus-sign" ng-click="vote(suggestion,'up')"></span>
-				<span ng-show="!(main.getCurrentUserItemScore(suggestion,'suggestion') < 0) && main.data.currentUser.id != suggestion.authorId && main.data.currentUser.id" class="glyphicon glyphicon-minus-sign" ng-click="vote(suggestion,'down')"></span>
+				 ng-show="!(getCurrentUserItemScore(suggestion,'suggestion') > 0) && data.currentUser.id != suggestion.authorId && data.currentUser.id" class="glyphicon glyphicon-plus-sign" ng-click="vote(suggestion,'up')"></span>
+				<span ng-show="!(getCurrentUserItemScore(suggestion,'suggestion') < 0) && data.currentUser.id != suggestion.authorId && data.currentUser.id" class="glyphicon glyphicon-minus-sign" ng-click="vote(suggestion,'down')"></span>
 			</p>
 		</div>
 	</div>
