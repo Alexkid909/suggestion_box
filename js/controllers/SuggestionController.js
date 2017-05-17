@@ -1,7 +1,9 @@
 app.controller('SuggestionController',
 	['$scope',
 	'$routeParams',
-	'suggestions','sharedScope','users',
+	'suggestions',
+	'sharedScope',
+	'users',
 	function($scope,$routeParams,suggestions,sharedScope,users) {
 		var _this = this;
 		_this.users = {};
@@ -12,7 +14,6 @@ app.controller('SuggestionController',
 		for (key in sharedScope) {
 			_this.sharedScope[key] = sharedScope[key];
 		};
-
 		$scope.suggestion = suggestions[$routeParams.id];
 		$scope.comments = $scope.suggestion.comments;
 		$scope.getCommentAuthorNames = function() {

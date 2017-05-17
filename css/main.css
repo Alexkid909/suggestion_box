@@ -93,6 +93,10 @@ h1 {
 	font-family: 'Advent Pro';
 }
 
+.container-fluid {
+	padding: 0;
+}
+
 ul.nav {
 	margin-top: 2vw;
 }
@@ -126,7 +130,7 @@ ul.nav li a:hover, ul.nav li a:focus {
 .suggestion-divider, .comment-divider {
 	border-bottom: 1px solid white;
     display: inline-block;
-    vertical-align: top;    
+    vertical-align: baseline; 
 }
 
 .suggestion-divider {
@@ -134,7 +138,8 @@ ul.nav li a:hover, ul.nav li a:focus {
 }
 
 .comment-divider {
-    width: 28em;
+    width: 80%;
+	margin:0.25em 0;    
 }
 
 
@@ -156,7 +161,7 @@ ul.nav li a:hover, ul.nav li a:focus {
 	color: inherit;
 }
 
-.suggestion-container,.comment-container {
+.suggestion,.comment-container {
 	background: linear-gradient(to right bottom,rgba(114,179,214,1),rgba(128, 190, 218,1));
 	padding: 1em 0.5em;
 	margin-top: 3vw;
@@ -165,23 +170,30 @@ ul.nav li a:hover, ul.nav li a:focus {
 
 }
 
-.suggestion-container.active {
+.suggestion.active, .comment.active {
     position: relative;
     z-index: 1;	
 }
 
-.suggestion-container:first-of-type {
-	margin-top: 2em;
+.comment.active {
+	background: linear-gradient(to right bottom,rgba(114,179,214,1),rgba(128, 190, 218,1));	
 }
 
-.comment-divider {
-	margin:0.25em 0;
+.suggestion:first-of-type {
+	margin-top: 2em;
 }
 
 .comment {
 	font-size: 1em;
 	margin-bottom: 0;
-	margin-top: 2em;
+	padding-top: 0.5em;
+	margin-top: 0.5em;
+	position: relative;
+	padding-left: 8em;
+}
+
+.comment-container .suggestion-content-container {
+	margin-bottom: 1em;
 }
 
 form.sign_in {
@@ -228,7 +240,7 @@ button.btn {
 	padding-right: 2.5em;
 }
 
-.suggestion-container .suggestion-number, .comment-container .suggestion-number {
+.suggestion .suggestion-number, .comment-container .suggestion-number {
 	font-size: 3em;
 	
 }
@@ -283,10 +295,6 @@ div.item-toolbar .glyphicon {
 	margin-bottom: 0;
 	padding-right: 1vw;
 	padding-bottom: 0.5vw;
-}
-
-.comment {
-	padding-left: 8em;
 }
 
 .comments {

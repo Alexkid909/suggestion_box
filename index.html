@@ -33,6 +33,10 @@ css/bootstrap.min.css" rel="stylesheet">
 							<p ng-click="signOut($event)" ng-show="main.users.variables.currentUser.name">Sign Out</p>
 						</li>
 					</ul>
+          <div class="messaging">
+            <p ng-hide="main.users.variables.currentUser.name" class="">Sign in to add, vote, or comment on a suggestion.</p>
+            <p ng-show="main.users.variables.currentUser.name">Hi {{main.users.variables.currentUser.name}}! You can add, vote, or comment on a suggestion.</p>          
+          </div>
 			</div>	
 		</div>
 		<div class="main">

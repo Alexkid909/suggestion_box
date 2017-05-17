@@ -1,10 +1,15 @@
-app.factory('sharedScope',['$rootScope','users',function($rootScope,users) {
+app.factory('sharedScope',
+	['$rootScope'
+	,'users'
+	,function($rootScope,users) {
 	var _this = this;
 	_this.data = {
 		editMode: false,
 		dialogMode: false,
 		currentUser: {},
-		itemBeingEdited: null
+		itemBeingEdited: null,
+		dialogItem: null
+
 	};
 	_this.signOut = function(e) {
 		e.preventDefault
@@ -16,22 +21,25 @@ app.factory('sharedScope',['$rootScope','users',function($rootScope,users) {
 		var editMode = _this.data.editMode;
 		_this.data.editMode = !editMode;
 	},
-	_this.deleteItem = function(event,item,itemType) {
-		this.data.dialogItem.deleted = true;
-		this.toggleConfirmDialog();
+	_this.deleteItem = function() {
+		debugger;
+		_this.data.dialogItem.deleted = true;
+		_this.toggleConfirmDialog();
 	},
-	_this.editItem = function(index,event,item) {
-		// debugger;
-		var suggestionTextElement = document.querySelectorAll('.suggestion-container')[index].querySelector('.suggestion-title');
+	_this.editItem = function(index,event,item,itemType) {
+		debugger;
+		var itemTypeClass = '.'+itemType;
+		var textElementTitleString = '.'+itemType+'-title';
+		var textElement = document.querySelectorAll(itemTypeClass)[index].querySelector(textElementTitleString);
 		_this.data.itemBeingEdited = index;
-		suggestionTextElement.setAttribute('contentEditable',true);
-		suggestionTextElement.focus();
+		textElement.setAttribute('contentEditable',true);
+		textElement.focus();
 			_this.data.editMode = true;
-		suggestionTextElement.addEventListener('keypress',function(event) {
+		textElement.addEventListener('keypress',function(event) {
 			if(event.code == 'Enter') {
 				event.preventDefault();
-				item.title = suggestionTextElement.textContent;
-				suggestionTextElement.blur();
+				item.title = textElement.textContent;
+				textElement.blur();
 				$rootScope.$apply(function() {
 					_this.data.editMode = false;
 					_this.data.itemBeingEdited = null;
@@ -41,9 +49,9 @@ app.factory('sharedScope',['$rootScope','users',function($rootScope,users) {
 	},
 	_this.toggleConfirmDialog = function(item) {
 		debugger;
-		var dialogMode = this.data.dialogMode;
-		this.data.dialogMode = !dialogMode;
-		this.data.dialogItem = item;
+		var dialogMode = _this.data.dialogMode;
+		_this.data.dialogMode = !dialogMode;
+		_this.data.dialogItem = item;
 	}	
 	return _this;
 }]);

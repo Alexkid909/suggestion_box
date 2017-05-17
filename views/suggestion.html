@@ -7,15 +7,16 @@
 			</p>
 			<span class="suggestion-divider"></span>
 		</div>
-		<div ng-repeat="comment in comments | filter:{'deleted' : 'false'}" class="comment">
+		<div ng-repeat="comment in comments | filter:{'deleted' : 'false'}" class="comment" ng-class="{active : main.sharedScope.data.itemBeingEdited == $index}">
 			<p>				
-				<span class="author comment-author">{{comment.authorName}}</span>			
-				<span class="comment-title"> - {{comment.body}}</span>
+				<span class="author comment-author">{{comment.authorName}}</span>
+				<span> - </span>			
+				<span class="comment-title">{{comment.body}}</span>
 			</p>
 			<span class="comment-divider"></span>
 			<div class="item-toolbar">
-				<span ng-show="main.users.variables.currentUser.id == suggestion.authorId" class="glyphicon glyphicon-remove-sign" ng-click="toggleConfirmDialog(suggestion)"></span>
-				<span ng-show="main.users.variables.currentUser.id == suggestion.authorId" class="glyphicon glyphicon-edit" ng-click="editItem($index,$event,suggestion)"></span>
+				<span ng-show="main.users.variables.currentUser.id == comment.authorId" class="glyphicon glyphicon-remove-sign" ng-click="main.sharedScope.toggleConfirmDialog(comment)"></span>
+				<span ng-show="main.users.variables.currentUser.id == comment.authorId" class="glyphicon glyphicon-edit" ng-click="main.sharedScope.editItem($index,$event,comment,'comment')"></span>
 			</div>
 			<p>
 				<span class="glyphicon glyphicon-thumbs-up"></span>

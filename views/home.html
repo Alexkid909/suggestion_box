@@ -1,12 +1,10 @@
-	<p ng-hide="main.users.variables.currentUser.name" class="">Sign in to add, vote, or comment on a suggestion.</p>
-	<p ng-show="main.users.variables.currentUser.name">Hi {{main.users.variables.currentUser.name}}! You can add, vote, or comment on a suggestion.</p>
 	<form ng-show="main.users.variables.currentUser.name" ng-submit="addSuggestion()">
 		<div class="form-group">
 			<input type="text" class="form-control" placeholder="Your super cool suggestions here" ng-model="title"></input>
 		</div>
 		<button type="submit" class="btn btn-primary">Suggest</button>
 	</form>
-	<div class="suggestion-container row" ng-repeat="suggestion in suggestions | orderBy: '-votes' | filter:{'deleted' : 'false'}"
+	<div class="suggestion row" ng-repeat="suggestion in suggestions | orderBy: '-votes' | filter:{'deleted' : 'false'}"
 	ng-class="{active : main.sharedScope.data.itemBeingEdited == $index}">
 		<div class="suggestion-number-container col-sm-1">
 			<p class="suggestion-number">{{$index+1}}.</p>		
@@ -20,7 +18,7 @@
 			<span class="suggestion-divider"></span>
 			<div class="item-toolbar">
 				<span ng-show="main.users.variables.currentUser.id == suggestion.authorId" class="glyphicon glyphicon-remove-sign" ng-click="main.sharedScope.toggleConfirmDialog(suggestion)"></span>
-				<span ng-show="main.users.variables.currentUser.id == suggestion.authorId" class="glyphicon glyphicon-edit" ng-click="main.sharedScope.editItem($index,$event,suggestion)"></span>
+				<span ng-show="main.users.variables.currentUser.id == suggestion.authorId" class="glyphicon glyphicon-edit" ng-click="main.sharedScope.editItem($index,$event,suggestion,'suggestion')"></span>
 			</div>
 			<a class="comments" href="#/suggestion/{{suggestion.id}}">Comments</a>
 			<p class="votes">
