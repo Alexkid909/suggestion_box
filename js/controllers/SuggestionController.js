@@ -3,10 +3,14 @@ app.controller('SuggestionController',
 	'$routeParams',
 	'suggestions','sharedScope','users',
 	function($scope,$routeParams,suggestions,sharedScope,users) {
-		// var _this = this;
-		// _this.data = sharedScope.data;
+		var _this = this;
+		_this.users = {};
+		_this.sharedScope = {};
+		for (key in users) {
+			_this.users[key] = users[key];
+		};
 		for (key in sharedScope) {
-			$scope[key] = sharedScope[key];
+			_this.sharedScope[key] = sharedScope[key];
 		};
 
 		$scope.suggestion = suggestions[$routeParams.id];
@@ -19,15 +23,15 @@ app.controller('SuggestionController',
 		};
 		$scope.getCommentAuthorNames();		
 		$scope.addComment = function() {
-			debugger;
+			// debugger;
 			if(!$scope.body || $scope.body === "") {
 				return; 
 			}
 			$scope.suggestion.comments.push({
 				id: $scope.comments.length,
 				body: $scope.body,
-				authorId: $scope.data.currentUser.id,
-				authorName: $scope.data.currentUser.name,
+				authorId: _this.users.variables.currentUser.id,
+				authorName: _this.users.variables.currentUser.name,
 				deleted: false,
 				votes: 0,
 
@@ -35,16 +39,17 @@ app.controller('SuggestionController',
 			$scope.body = '';
 		};
 		$scope.vote = function(comment,direction) {
+			debugger;
 			var userVotedItem = users.getUserVotedItem(comment,"comment");			
 			if(!userVotedItem) {
 				var newItem = 					{
 						id: comment.id,
 						score: 1
 					};
-				if(!$scope.data.currentUser.commentsVoted) {
-					_this.data.currentUser.commentsVoted = []
+				if(!_this.users.variables.currentUser.commentsVoted) {
+					_this.users.variables.currentUser.commentsVoted = []
 				}
-				$scope.data.currentUser.commentsVoted.push(newItem);
+				_this.users.variables.currentUser.commentsVoted.push(newItem);
 			} else {
 				switch (direction) {
 					case "up":

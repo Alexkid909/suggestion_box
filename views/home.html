@@ -1,5 +1,3 @@
-
-	<p>Home {{main.users.variables.currentUser.name}}</p>
 	<p ng-hide="main.users.variables.currentUser.name" class="">Sign in to add, vote, or comment on a suggestion.</p>
 	<p ng-show="main.users.variables.currentUser.name">Hi {{main.users.variables.currentUser.name}}! You can add, vote, or comment on a suggestion.</p>
 	<form ng-show="main.users.variables.currentUser.name" ng-submit="addSuggestion()">
