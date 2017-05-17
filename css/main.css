@@ -118,6 +118,10 @@ ul.nav li a:hover, ul.nav li a:focus {
     font-size: 1.5em;
 }
 
+.header .messaging {
+	margin-top: 2em;
+} 
+
 .main {
 	padding-bottom: 5em;
 	margin-top: 4em;
@@ -197,8 +201,13 @@ ul.nav li a:hover, ul.nav li a:focus {
 }
 
 form.sign_in {
-	width: 50%;
-    margin: 0 auto;	
+	width: 45%;
+    margin: 0 auto;
+    transform: translateY(70%);    	
+}
+
+form.sign_in button.btn {
+	width: 100%;
 }
 
 form.form-comment {
@@ -211,7 +220,8 @@ input.form-control {
 	color: white;
 	border-radius: 0;
 	height: 2.5em;
-	font-size: 1.5em;
+    font-size: 1.4em;
+    padding-left: 1em;
 }
 
 input.form-control::placeholder {
