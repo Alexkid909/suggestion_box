@@ -278,7 +278,7 @@ button.btn {
 	font-size: 1.25em;
 }
 
-span.suggestion-title {
+span.suggestion-title, span.comment-title {
 	outline: none;
 }
 

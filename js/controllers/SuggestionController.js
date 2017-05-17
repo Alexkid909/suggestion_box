@@ -24,7 +24,6 @@ app.controller('SuggestionController',
 		};
 		$scope.getCommentAuthorNames();		
 		$scope.addComment = function() {
-			// debugger;
 			if(!$scope.body || $scope.body === "") {
 				return; 
 			}
@@ -40,7 +39,6 @@ app.controller('SuggestionController',
 			$scope.body = '';
 		};
 		$scope.vote = function(comment,direction) {
-			debugger;
 			var userVotedItem = users.getUserVotedItem(comment,"comment");			
 			if(!userVotedItem) {
 				var newItem = 					{
