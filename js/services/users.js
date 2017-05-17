@@ -26,20 +26,22 @@ app.factory('users',[function() {
 			name: 'Tom' 
 		}
 	],
-	_this.currentUser = {},
+	_this.variables = {
+		currentUser: {}
+	},
 	_this.getCurrentUserId = function() {
-			return this.currentUserId;
+			return this.variables.currentUserId;
 		},
 	_this.setCurrentUserId = function(id){
-		this.currentUserId = id;
+		this.variables.currentUserId = id;
 
 	},
 	_this.getUserVotedItem = function(item,itemType) {
-		debugger;
+		// debugger;
 		var userVotedItem;
 
-		if (_this.data.currentUser.hasOwnProperty(itemType+"sVoted")) {
-			_this.data.currentUser[itemType+"sVoted"].forEach(function(itemVoted) { 
+		if (_this.variables.currentUser.hasOwnProperty(itemType+"sVoted")) {
+			_this.variables.currentUser[itemType+"sVoted"].forEach(function(itemVoted) { 
 				if (itemVoted.id == item.id) {
 					userVotedItem = itemVoted;
 				};
@@ -61,12 +63,12 @@ app.factory('users',[function() {
 				return _this.data[i].name;
 			};
 		};
-	},
+	}/*,
 	_this.getCurrentUserName = function() {
 		debugger;
 		if(this.getCurrentUserId() == undefined) {
-			this.currentUserName = this.getUserName(this.getCurrentUserId());
+			this.variables.currentUserName = this.getUserName(this.getCurrentUserId());
 		};
-	}	
+	}	*/
 	return _this;
 }]);

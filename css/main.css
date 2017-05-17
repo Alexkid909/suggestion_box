@@ -298,10 +298,23 @@ div.item-toolbar .glyphicon {
 	margin-left: 1vw;
 }
 
+@media (max-width: 1024px) {
+
+	.main-container {
+		width: 90vw;
+	}
+
+	body {
+		font-size: 1.65vh;
+	}
+
+
+}
+
 @media (min-device-width: 360px) and (max-device-width: 1279px) and (min-device-height: 640px) {
 
 	body {
-		font-size: 1.5vw;
+		font-size: 1.75vw;
 	}
 
 	.main-container {

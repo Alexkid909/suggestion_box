@@ -16,7 +16,7 @@ css/bootstrap.min.css" rel="stylesheet">
 
 </head>
 <body ng-app="SuggestionBox" ng-controller="MainController as main">
-	<div class="full-app-greyout-filter" ng-class="{'active' : data.editMode || data.dialogMode}"></div>
+	<div class="full-app-greyout-filter" ng-class="{'active' : main.sharedScope.data.editMode || main.sharedScope.data.dialogMode}"></div>
 	<div class="main-container">	
 		<div class="header">
 			<div class="container-fluid">
@@ -29,19 +29,19 @@ css/bootstrap.min.css" rel="stylesheet">
 							</h1>
 						</li>
 						<li	class="li-sign_in">
-							<a ng-hide="main.currentUser.name" href="#/sign_in/">Sign In</a>
-							<p ng-click="signOut($event)" ng-show="main.currentUser.name">Sign Out</p>
+							<a ng-hide="main.users.variables.currentUser.name" href="#/sign_in/">Sign In</a>
+							<p ng-click="signOut($event)" ng-show="main.users.variables.currentUser.name">Sign Out</p>
 						</li>
 					</ul>
 			</div>	
 		</div>
 		<div class="main">
-			<div class="dialog confirm" ng-class="{active : data.dialogMode}">
+			<div class="dialog confirm" ng-class="{active : main.sharedScope.data.dialogMode}">
 				<p>Are you sure?</p>
-				<button ng-click="toggleConfirmDialog()" class="btn-no">No</button>
-				<button ng-click="deleteItem()" class="btn-yes">Yes</button>
+				<button ng-click="main.sharedScope.toggleConfirmDialog()" class="btn-no">No</button>
+				<button ng-click="main.sharedScope.deleteItem()" class="btn-yes">Yes</button>
 			</div>
-      <p>Index {{main.currentUser.name}}</p>
+      <p>Index {{main.users.variables.currentUser.name}}</p>
 			<div ng-view>	
 			</div>
 		</div>	

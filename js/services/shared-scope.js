@@ -3,6 +3,7 @@ app.factory('sharedScope',['$rootScope','users',function($rootScope,users) {
 	_this.data = {
 		editMode: false,
 		dialogMode: false,
+		currentUser: {},
 		itemBeingEdited: null
 	};
 	_this.signOut = function(e) {
@@ -20,6 +21,7 @@ app.factory('sharedScope',['$rootScope','users',function($rootScope,users) {
 		this.toggleConfirmDialog();
 	},
 	_this.editItem = function(index,event,item) {
+		// debugger;
 		var suggestionTextElement = document.querySelectorAll('.suggestion-container')[index].querySelector('.suggestion-title');
 		_this.data.itemBeingEdited = index;
 		suggestionTextElement.setAttribute('contentEditable',true);

@@ -4,18 +4,20 @@ app.controller('MainController',['$scope'
 	,'users'
 	,function($scope,suggestions,sharedScope,users) {
 		var _this = this;
-		$scope.header = 'Suggestion Box';
-		$scope.suggestions = suggestions;
+		_this.users = {};
+		_this.sharedScope = {};
 		for (key in users) {
-			_this[key] = users[key];
+			_this.users[key] = users[key];
 		};
 		for (key in sharedScope) {
-			$scope[key] = sharedScope[key];
+			_this.sharedScope[key] = sharedScope[key];
 		};
+		$scope.header = 'Suggestion Box';
+		$scope.suggestions = suggestions;
 		$scope.getSuggestionAuthorNames = function() {
 					for (var i = 0;i < $scope.suggestions.length;i++) {
 					var authorId = $scope.suggestions[i].authorId;
-					$scope.suggestions[i].authorName = _this.getUserName(authorId);
+					$scope.suggestions[i].authorName = _this.users.getUserName(authorId);
 			};
 		};
 		$scope.getSuggestionAuthorNames();
@@ -26,8 +28,8 @@ app.controller('MainController',['$scope'
 			$scope.suggestions.push({
 				id: suggestions.length,
 				title: $scope.title,
-				authorId: $scope.data.currentUser.id,
-				authorName: $scope.data.currentUser.name,
+				authorId: _this.users.variables.currentUser.id,
+				authorName: _this.users.variables.currentUser.name,
 				votes: 0,
 				deleted: false,				
 				comments: []
@@ -35,16 +37,17 @@ app.controller('MainController',['$scope'
 			$scope.title = '';
 		};
 		$scope.vote = function(suggestion,direction) {
-			var userVotedItem = _this.getUserVotedItem(suggestion,"suggestion");			
+			debugger;
+			var userVotedItem = _this.users.getUserVotedItem(suggestion,"suggestion");			
 			if(!userVotedItem) {
 				var newItem = 					{
 						id: suggestion.id,
 						score: 1
 					};
-				if(!$scope.data.currentUser.suggestionsVoted) {
-					$scope.data.currentUser.suggestionsVoted = []
+				if(!_this.users.variables.currentUser.suggestionsVoted) {
+					_this.users.variables.currentUser.suggestionsVoted = []
 				}
-				$scope.data.currentUser.suggestionsVoted.push(newItem);
+				_this.users.variables.currentUser.suggestionsVoted.push(newItem);
 			} else {
 				switch (direction) {
 					case "up":
@@ -64,6 +67,5 @@ app.controller('MainController',['$scope'
 					break;
 			};
 		};		
-		debugger;
 	}
 ]);
