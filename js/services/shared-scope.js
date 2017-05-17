@@ -22,12 +22,10 @@ app.factory('sharedScope',
 		_this.data.editMode = !editMode;
 	},
 	_this.deleteItem = function() {
-		debugger;
 		_this.data.dialogItem.deleted = true;
 		_this.toggleConfirmDialog();
 	},
 	_this.editItem = function(index,event,item,itemType) {
-		debugger;
 		var itemTypeClass = '.'+itemType;
 		var textElementTitleString = '.'+itemType+'-title';
 		var textElement = document.querySelectorAll(itemTypeClass)[index].querySelector(textElementTitleString);
@@ -48,7 +46,6 @@ app.factory('sharedScope',
 		});
 	},
 	_this.toggleConfirmDialog = function(item) {
-		debugger;
 		var dialogMode = _this.data.dialogMode;
 		_this.data.dialogMode = !dialogMode;
 		_this.data.dialogItem = item;

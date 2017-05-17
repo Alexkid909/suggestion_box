@@ -203,7 +203,7 @@ ul.nav li a:hover, ul.nav li a:focus {
 form.sign_in {
 	width: 45%;
     margin: 0 auto;
-    transform: translateY(70%);    	
+    	
 }
 
 form.sign_in button.btn {
