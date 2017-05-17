@@ -35,13 +35,13 @@ div.full-app-greyout-filter.active {
 
 div.dialog.active {
 	transform: translate(-50%,-50%);
-	opacity: 1;	
+	opacity: 1;
+	z-index: 1;
 }
 
 div.dialog {
 	opacity: 0;
 	display: initial;
-	z-index: 1;	
 	position: fixed;
 	color: white;
 	height: 25%;
@@ -203,7 +203,7 @@ ul.nav li a:hover, ul.nav li a:focus {
 form.sign_in {
 	width: 45%;
     margin: 0 auto;
-    	
+
 }
 
 form.sign_in button.btn {

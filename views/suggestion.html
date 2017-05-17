@@ -7,24 +7,7 @@
 			</p>
 			<span class="suggestion-divider"></span>
 		</div>
-		<div ng-repeat="comment in comments | filter:{'deleted' : 'false'}" class="comment" ng-class="{active : main.sharedScope.data.itemBeingEdited == $index}">
-			<p>				
-				<span class="author comment-author">{{comment.authorName}}</span>
-				<span> - </span>			
-				<span class="comment-title">{{comment.body}}</span>
-			</p>
-			<span class="comment-divider"></span>
-			<div class="item-toolbar">
-				<span ng-show="main.users.variables.currentUser.id == comment.authorId" class="glyphicon glyphicon-remove-sign" ng-click="main.sharedScope.toggleConfirmDialog(comment)"></span>
-				<span ng-show="main.users.variables.currentUser.id == comment.authorId" class="glyphicon glyphicon-edit" ng-click="main.sharedScope.editItem($index,$event,comment,'comment')"></span>
-			</div>
-			<p>
-				<span class="glyphicon glyphicon-thumbs-up"></span>
-				{{comment.votes}}
-				<span class="glyphicon glyphicon-plus-sign"	ng-show="!(main.users.getCurrentUserItemScore(comment,'comment') > 0) && main.users.variables.currentUser.id != comment.authorId && main.users.variables.currentUser.id" ng-click="vote(comment,'up')"></span>
-				<span class="glyphicon glyphicon-minus-sign" ng-show="!(main.users.getCurrentUserItemScore(comment,'comment') < 0) && main.users.variables.currentUser.id != comment.authorId && main.users.variables.currentUser.id" ng-click="vote(comment,'down')"></span>
-			</p>
-		</div>							
+		<comment ng-repeat="comment in comments | filter:{'deleted' : 'false'}"></comment>						
 	</div>
 </div>
 <form class="form-comment" ng-show="main.users.variables.currentUser.name" ng-submit="addComment()">
