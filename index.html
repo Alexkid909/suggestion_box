@@ -30,7 +30,7 @@ css/bootstrap.min.css" rel="stylesheet">
 						</li>
 						<li	class="li-sign_in">
 							<a ng-hide="main.users.variables.currentUser.name" href="#/sign_in/">Sign In</a>
-							<p ng-click="signOut($event)" ng-show="main.users.variables.currentUser.name">Sign Out</p>
+							<a ng-controller="SignInController as SignIn" ng-click="signOut($event)" ng-show="main.users.variables.currentUser.name" href="">Sign Out</a>
 						</li>
 					</ul>
           <div class="messaging">

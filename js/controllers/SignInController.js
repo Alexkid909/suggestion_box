@@ -11,10 +11,6 @@ app.controller('SignInController',['$scope',
 		for (key in users) {
 			_this.users[key] = users[key];
 		};
-		// for (key in sharedScope) {
-		// 	_this.sharedScope[key] = sharedScope[key];
-		// };
-
 		$scope.users = users.data;
 		$scope.currentUser = users.variables.currentUser;
 		$scope.signIn = function() {
@@ -26,6 +22,9 @@ app.controller('SignInController',['$scope',
 			_this.users.variables.currentUser = users.data[newUserId];
 			console.log("Currently signed in as "+_this.users.variables.currentUser.name+" ID "+_this.users.variables.currentUser.id);			
 			window.location.href = '#/';
+		};
+		$scope.signOut = function(event) {
+			_this.users.variables.currentUser = {};
 		};
 	}
 ]);
