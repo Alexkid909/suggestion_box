@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Suggestion Box</title>
 	<link href="https://fonts.googleapis.com/css?family=Advent+Pro|Comfortaa" rel="stylesheet">	
 	<link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/
@@ -20,14 +21,12 @@ css/bootstrap.min.css" rel="stylesheet">
 	<div class="main-container">	
 		<div class="header">
 			<div class="container-fluid">
+					<h1 class="suggestion-box-header">
+						<a href="#/">
+							{{header}}
+						</a>
+					</h1>
 					<ul class="nav">
-						<li class="li-header">
-							<h1 class="suggestion-box-header">
-								<a href="#/">
-									{{header}}
-								</a>
-							</h1>
-						</li>
 						<li	class="li-sign_in">
 							<a ng-hide="main.users.variables.currentUser.name" href="#/sign_in/">Sign In</a>
 							<a ng-controller="SignInController as SignIn" ng-click="signOut($event)" ng-show="main.users.variables.currentUser.name" href="">Sign Out</a>
