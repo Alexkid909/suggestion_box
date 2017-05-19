@@ -37,7 +37,6 @@ app.controller('MainController',['$scope'
 			$scope.title = '';
 		};
 		$scope.vote = function(suggestion,direction) {
-			debugger;
 			var userVotedItem = _this.users.getUserVotedItem(suggestion,"suggestion");			
 			if(!userVotedItem) {
 				var newItem = 					{
