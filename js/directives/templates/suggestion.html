@@ -1,10 +1,10 @@
-<div class="suggestion row" ng-class="{active : main.sharedScope.data.itemBeingEdited == $index}">
+<div class="suggestion row" ng-class="{active : main.sharedScope.data.itemBeingEditedIndex == $index}">
 	<div class="suggestion-content-container">
 		<p>
 			<span class="suggestion-number">{{$index+1}}.</span>		
 			<span class="author suggestion-author">{{suggestion.authorName}}</span>
 			<span> - </span>
-			<span ng-model="suggestion.title" class="suggestion-title">{{suggestion.title}}</span>
+			<span ng-model="suggestion.title" class="title">{{suggestion.title}}</span>
 		</p>
 	</div>
 	<span class="suggestion-divider"></span>

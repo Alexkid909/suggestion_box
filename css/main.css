@@ -145,7 +145,7 @@ ul.nav li a:hover, ul.nav li a:focus {
 
 .suggestion-divider, .comment-divider {
 	border-bottom: 1px solid white;
-    display: inline-block;
+    display: block;
     vertical-align: middle;
 	margin-top: 1.25em;
 
@@ -205,7 +205,6 @@ ul.nav li a:hover, ul.nav li a:focus {
 }
 
 .comment {
-	font-size: 1em;
 	margin-bottom: 0;
 	padding-top: 0.5em;
 	margin-top: 0.5em;
@@ -303,15 +302,19 @@ span.suggestion-number {
 	padding-bottom: 0.5em;
 }
 
-.suggestion-content-container .suggestion-title, .comment-container .suggestion-title, .suggestion-content-container .suggestion-author, .comment-container .suggestion-author {
+.suggestion-content-container .title, .comment-container .title, .suggestion-content-container .suggestion-author, .comment-container .suggestion-author {
 	font-size: 1.25em;
+}
+
+.comment-container .title {
+	font-size: 	1.15em;
 }
 
 .suggestion-content-container span {
 	vertical-align: top;
 }
 
-span.suggestion-title, span.comment-title {
+span.title {
 	outline: none;
 }
 
@@ -353,7 +356,7 @@ div.item-toolbar .glyphicon {
 	margin-top: 1.25em;	
 }
 
-.suggestion-footer div  {
+.suggestion-footer div, .comment-footer div  {
 	padding: 0;
 }
 
@@ -389,6 +392,11 @@ div.item-toolbar .glyphicon {
 		font-size: 5em;
 	}
 
+	.suggestion-content-container {
+		height: 100%;
+		margin-right: 0;
+	}	
+
 	.main-container {
 		width: 87.5vw;
 		padding-left: 0.15em;
@@ -397,12 +405,11 @@ div.item-toolbar .glyphicon {
 	.votes>div {
 		display: block;
 		width: 100%;
-	    padding-right: 60%;
-	    text-align: center;
+	    text-align: left;
 
 	}
 
-	.suggestion-footer {
+	.suggestion-footer, .comment-footer {
 		font-size: 1.5em;
 	}
 

@@ -17,7 +17,7 @@ css/bootstrap.min.css" rel="stylesheet">
 
 </head>
 <body ng-app="SuggestionBox" ng-controller="MainController as main">
-	<div class="full-app-greyout-filter" ng-class="{'active' : main.sharedScope.data.editMode || main.sharedScope.data.dialogMode}"></div>
+	<div class="full-app-greyout-filter" ng-click="main.sharedScope.toggleEditMode()" ng-class="{'active' : main.sharedScope.data.editMode || main.sharedScope.data.dialogMode}"></div>
 	<div class="main-container">	
 		<div class="header">
 			<div class="container-fluid">
