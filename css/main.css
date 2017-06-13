@@ -145,12 +145,15 @@ ul.nav li a:hover, ul.nav li a:focus {
 
 .suggestion-divider, .comment-divider {
 	border-bottom: 1px solid white;
-    display: inline-block;
-    vertical-align: baseline; 
+    display: block;
+    vertical-align: middle;
+	margin-top: 1.25em;
+
 }
 
 .suggestion-divider {
     width: 80%;
+    font-size: 1.5em;
 }
 
 .comment-divider {
@@ -184,6 +187,7 @@ ul.nav li a:hover, ul.nav li a:focus {
 	margin-top: 3vw;
 	width: 100%;
 	height: 100%;
+	position: relative;
 
 }
 
@@ -201,7 +205,6 @@ ul.nav li a:hover, ul.nav li a:focus {
 }
 
 .comment {
-	font-size: 1em;
 	margin-bottom: 0;
 	padding-top: 0.5em;
 	margin-top: 0.5em;
@@ -210,6 +213,12 @@ ul.nav li a:hover, ul.nav li a:focus {
 
 .comment-container .suggestion-content-container {
 	margin-bottom: 1em;
+	padding-left: 0.5em;
+}
+
+.comment-container .col-sm-12, .comment-container .col-sm-10 {
+	padding-right: 0;
+	padding-left: 0;
 }
 
 form.sign_in {
@@ -254,6 +263,10 @@ button.btn {
 	width: 8em;
 }
 
+span.suggestion-number {
+	line-height: 1.1;
+}
+
 
 .suggestion-number-container, .suggestion-content-container {
 	display: inline-block;
@@ -263,23 +276,22 @@ button.btn {
 }
 
 .suggestion-content-container {
-	padding-right: 0.5em;
+	height: 100%;
+	margin-right: 3.5em;
 }
 
 .suggestion .suggestion-number, .comment-container .suggestion-number {
 	font-size: 3em;
+	padding-right: 0.5em;
+	float: left;
 	
 }
+
+
 
 .suggestion-number-container p {
 	height: 100%;
 	line-height: 1;
-}
-
-
-.suggestion-content-container {
-	height: 100%;
-	padding-bottom: 2.5em;
 }
 
 /*.comment-container p, .suggestion-content-container p, .suggestion-content-container a {
@@ -290,18 +302,34 @@ button.btn {
 	padding-bottom: 0.5em;
 }
 
-.suggestion-content-container .suggestion-title, .comment-container .suggestion-title, .suggestion-content-container .suggestion-author, .comment-container .suggestion-author {
+.suggestion-content-container .title, .comment-container .title, .suggestion-content-container .suggestion-author, .comment-container .suggestion-author {
 	font-size: 1.25em;
 }
 
-span.suggestion-title, span.comment-title {
+.comment-container .title {
+	font-size: 	1.15em;
+}
+
+.suggestion-content-container span {
+	vertical-align: top;
+}
+
+span.title {
 	outline: none;
+}
+
+/*.suggestion-footer div {
+	display: inline-block;
+}*/
+
+.suggestion-footer div.comments-link-container {
+	float: right;
 }
 
 div.item-toolbar {
 	position: absolute;
     right: 1em;
-    top: 0.25em;
+    top: 1em;
     font-size: 1em;
     margin-left: 1em;
 }
@@ -316,19 +344,28 @@ div.item-toolbar .glyphicon {
 }
 
 .comments, .votes {
-	position: absolute;
-	bottom: -0.5em;
 	margin-bottom: 0;
-	padding-right: 1vw;
-	padding-bottom: 0.5vw;
-}
-
-.comments {
-	right: 0;
 }
 
 .votes {
-	left: 0;
+	padding-right: 1vw;
+	position: static;
+}
+
+.suggestion-footer {
+	margin-top: 1.25em;	
+}
+
+.suggestion-footer div, .comment-footer div  {
+	padding: 0;
+}
+
+.comments {
+	float: right;
+}
+
+.votes div {
+	display: inline-block;
 }
 
 @media (max-width: 1024px) {
@@ -342,18 +379,56 @@ div.item-toolbar .glyphicon {
 	}
 
 
+
 }
 
 @media (min-device-width: 360px) and (max-device-width: 1279px) and (min-device-height: 640px) {
 
 	body {
-		font-size: 1.75vw;
+		font-size: 2.25vw;
 	}
+
+	h1.suggestion-box-header {
+		font-size: 5em;
+	}
+
+	.suggestion-content-container {
+		height: 100%;
+		margin-right: 0;
+	}	
 
 	.main-container {
-		width: 85vw;
+		width: 87.5vw;
+		padding-left: 0.15em;
 	}
 
+	.votes>div {
+		display: block;
+		width: 100%;
+	    text-align: left;
+
+	}
+
+	.suggestion-footer, .comment-footer {
+		font-size: 1.5em;
+	}
+
+	div.item-toolbar {
+		position: relative;
+		display: block;
+	    right: auto;
+	    top: auto;
+	    margin-left: 0;
+	}	
+
+	div.item-toolbar .glyphicon {
+	    margin-left: 0;
+	}
+
+	.suggestion-content-container {
+		margin-right: 0;
+	}
+ 
 
 }
 
@@ -368,12 +443,9 @@ div.item-toolbar .glyphicon {
 		height: 30vw;
 	}
 
-	.glyphicon {
-		font-size: 	1.25em;
-	}
 
 	.header .container-fluid h1 a {
-		font-size: 0.65em;
+		font-size: 0.95em;
 	}
 
 	a {
@@ -391,11 +463,19 @@ div.item-toolbar .glyphicon {
 @media (max-device-width: 414px) and (max-device-height: 736px) {
 
 	body {
-		font-size: 3.5vw;
+		font-size: 4vw;
 	}
 
-	h1.suggestion-box-header {
-		font-size: 4.5em;
+	.header .container-fluid h1 a {
+		font-size: 0.6em;
+	}
+
+	.col-xs-1 {
+		width: 15%;
+	}
+
+	.col-xs-11 {
+		width: 85%;
 	}
 
 

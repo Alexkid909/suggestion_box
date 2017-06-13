@@ -1,24 +1,30 @@
-<div class="suggestion row" ng-class="{active : main.sharedScope.data.itemBeingEdited == $index}">
-	<div class="suggestion-number-container col-sm-1 col-xs-2">
-		<p class="suggestion-number">{{$index+1}}.</p>		
-	</div>
-	<div class="suggestion-content-container col-sm-11 col-xs-10">
+<div class="suggestion row" ng-class="{active : main.sharedScope.data.itemBeingEditedIndex == $index}">
+	<div class="suggestion-content-container">
 		<p>
+			<span class="suggestion-number">{{$index+1}}.</span>		
 			<span class="author suggestion-author">{{suggestion.authorName}}</span>
 			<span> - </span>
-			<span ng-model="suggestion.title" class="suggestion-title">{{suggestion.title}}</span>
+			<span ng-model="suggestion.title" class="title">{{suggestion.title}}</span>
 		</p>
-		<span class="suggestion-divider"></span>
-		<div class="item-toolbar">
-			<span ng-show="main.users.variables.currentUser.id == suggestion.authorId" class="glyphicon glyphicon-remove-sign" ng-click="main.sharedScope.toggleConfirmDialog(suggestion)"></span>
-			<span ng-show="main.users.variables.currentUser.id == suggestion.authorId" class="glyphicon glyphicon-edit" ng-click="main.sharedScope.editItem($index,$event,suggestion,'suggestion')"></span>
+	</div>
+	<span class="suggestion-divider"></span>
+	<div class="suggestion-footer row">
+		<div class="votes row col-xs-6">
+			<div class="votes-container">
+				<span class="glyphicon glyphicon-thumbs-up"></span>
+				<span>{{suggestion.votes}}</span>
+			</div>
+			<div class="vote-button-container">			
+				<span class="glyphicon glyphicon-plus-sign" 
+				 ng-show="!(main.users.getCurrentUserItemScore(suggestion,'suggestion') > 0) && main.users.variables.currentUser.id != suggestion.authorId && main.users.variables.currentUser.id" ng-click="vote(suggestion,'up')"></span>
+				<span class="glyphicon glyphicon-minus-sign" ng-show="!(main.users.getCurrentUserItemScore(suggestion,'suggestion') < 0) && main.users.variables.currentUser.id != suggestion.authorId && main.users.variables.currentUser.id" ng-click="vote(suggestion,'down')"></span>
+			</div>
+			<div class="item-toolbar">
+				<span ng-show="main.users.variables.currentUser.id == suggestion.authorId" class="glyphicon glyphicon-remove-sign" ng-click="main.sharedScope.toggleConfirmDialog(suggestion)"></span>
+				<span ng-show="main.users.variables.currentUser.id == suggestion.authorId" class="glyphicon glyphicon-edit" ng-click="main.sharedScope.editItem($index,$event,suggestion,'suggestion')"></span>
+			</div>
 		</div>
-		<a class="comments" href="#/suggestion/{{suggestion.id}}">Comments</a>
-		<p class="votes">
-			<span class="glyphicon glyphicon-thumbs-up"></span>
-			<span>{{suggestion.votes}}</span>
-			<span class="glyphicon glyphicon-plus-sign" 
-			 ng-show="!(main.users.getCurrentUserItemScore(suggestion,'suggestion') > 0) && main.users.variables.currentUser.id != suggestion.authorId && main.users.variables.currentUser.id" ng-click="vote(suggestion,'up')"></span>
-			<span class="glyphicon glyphicon-minus-sign" ng-show="!(main.users.getCurrentUserItemScore(suggestion,'suggestion') < 0) && main.users.variables.currentUser.id != suggestion.authorId && main.users.variables.currentUser.id" ng-click="vote(suggestion,'down')"></span>
-		</p>
+		<div class="comments-link-container col-xs-6">		
+			<a class="comments" href="#/suggestion/{{suggestion.id}}">Comments</a>
+		</div>	
 	</div>

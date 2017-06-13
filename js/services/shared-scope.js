@@ -8,6 +8,7 @@ app.factory('sharedScope',
 		dialogMode: false,
 		currentUser: {},
 		itemBeingEdited: null,
+		itemBeingEditedIndex: null,
 		dialogItem: null
 
 	};
@@ -18,6 +19,13 @@ app.factory('sharedScope',
 
 	},
 	_this.toggleEditMode = function() {
+		// debugger;
+		if (_this.data.editMode && _this.data.itemBeingEdited) {
+			var textElement = _this.data.itemBeingEdited.querySelector('.title');
+			textElement.setAttribute('contentEditable',false);
+			_this.data.itemBeingEdited = null;
+			_this.data.itemBeingEditedIndex = null;
+		};
 		var editMode = _this.data.editMode;
 		_this.data.editMode = !editMode;
 	},
@@ -26,23 +34,28 @@ app.factory('sharedScope',
 		_this.toggleConfirmDialog();
 	},
 	_this.editItem = function(index,event,item,itemType) {
+		// debugger;
 		var itemTypeClass = '.'+itemType;
-		var textElementTitleString = '.'+itemType+'-title';
-		var textElement = document.querySelectorAll(itemTypeClass)[index].querySelector(textElementTitleString);
-		_this.data.itemBeingEdited = index;
-		textElement.setAttribute('contentEditable',true);
-		textElement.focus();
-			_this.data.editMode = true;
-		textElement.addEventListener('keypress',function(event) {
+		_this.data.itemBeingEdited = document.querySelectorAll(itemTypeClass)[index];
+		var textElement = _this.data.itemBeingEdited.querySelector('.title');
+		_this.data.itemBeingEditedIndex = index;
+		var commitEdit = function(event) {
 			if(event.code == 'Enter') {
 				event.preventDefault();
 				item.title = textElement.textContent;
 				textElement.blur();
 				$rootScope.$apply(function() {
 					_this.data.editMode = false;
+					_this.data.itemBeingEditedIndex = null;
 					_this.data.itemBeingEdited = null;
 				});
 			};
+		}
+		textElement.setAttribute('contentEditable',true);
+		textElement.focus();
+			_this.data.editMode = true;
+		textElement.addEventListener('keypress',function(event) {
+			commitEdit(event);
 		});
 	},
 	_this.toggleConfirmDialog = function(item) {
